@@ -1,5 +1,5 @@
 # deSRA
-An automated protocol to extract sequence variation and changes in gene expression from public NGS datasets.
+differential expression of SRA: An automated protocol to extract sequence variation and changes in gene expression from public NGS datasets.
 
 ## Awesome Logo
 
