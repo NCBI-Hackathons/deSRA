@@ -1,5 +1,5 @@
-# ProjectForklift
-An automated protocol to extract variation or expression from public NGS datasets
+# deSRA
+An automated protocol to extract sequence variation and changes in gene expression from public NGS datasets.
 
 ## Awesome Logo
 
@@ -15,11 +15,11 @@ An automated protocol to extract variation or expression from public NGS dataset
 
 ## Why should we solve it?
 
-# What is <this software>?
+# What is deSRA?
 
 Overview Diagram
 
-# How to use <this software>
+# How to use deSRA
 
 ## Installation options:
 
@@ -33,7 +33,7 @@ The Docker image contains <this software> as well as a webserver and FTP server 
 2. `docker run ncbihackathons/<this software>` Run the docker image from the master shell script
 3. Edit the configuration files as below
 
-### Installing <this software> from Github
+### Installing deSRA from Github
 
 1. `git clone https://github.com/NCBI-Hackathons/<this software>.git`
 2. Edit the configuration files as below
