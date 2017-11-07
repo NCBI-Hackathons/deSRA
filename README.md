@@ -41,20 +41,22 @@ You will need gene names and SRR accessions for two alternative conditions.
 
 We provide two options for installing deSRA: Docker or directly from Github.
 
-### Docker
+### Requirements
 
-The Docker image contains deSRA as well as a webserver and FTP server in case you want to deploy the FTP server. It does also contain a web server for testing the deSRA main website (but should only be used for debug purposes).
+#### Docker
 
-1. `docker pull ncbihackathons/<this software>` command to pull the image from the DockerHub
-2. `docker run ncbihackathons/<this software>` Run the docker image from the master shell script
-3. Edit the configuration files as below
+1. Clone BioContainers Sandbox:
+    `git clone https://github.com/BioContainers/sandbox`
 
-### Installing deSRA from Github
+2. Build Docker images for magicblast
+    `docker build -t biocontainers/magicblast sandbox/magicblast/1.3.0/`
 
-1. `git clone https://github.com/NCBI-Hackathons/<this software>.git`
-2. Edit the configuration files as below
-3. `sh server/<this software>.sh` to test
-4. Add cron job as required (to execute <this software>.sh script)
+3. Build Docker images for Entrez-Direct
+ `docker build -t biocontainers/entrez-direct sandbox/entrez-direct/7.50.20171103/`
+
+### Installing ProjectForklift from Github
+
+1. `git clone https://github.com/NCBI-Hackathons/ProjectForklift`
 
 ### Configuration
 
