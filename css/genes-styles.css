@@ -29,6 +29,8 @@
       margin-top: 1.5rem;
       padding: 0 1.2rem 0 0; }      
 
+.usa-section {padding-top:3.5rem;}
+h1 span {color:#999; margin-left:1rem; font-size:2.5rem;}
 textarea { height:7rem;}
 label {font-weight: bold;}    
 fieldset {margin-top:3rem;}

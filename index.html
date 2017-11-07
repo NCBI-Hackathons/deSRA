@@ -31,7 +31,7 @@
       <form>
       <div class="row">
         <div class="usa-width-one-half">
-          <h1>deSRA</h1>
+          <h1>deSRA <span>/ˈdezəˌrā/</span></h1>
         
           <label for="input-type-textarea">Enter the genes IDs you are interested in</label>
           <textarea id="input-type-textarea" name="input-type-textarea"></textarea>
@@ -42,8 +42,9 @@
         </div>
         
         <div class="usa-width-one-half">
-          <h3>Short Explanation of this tool</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas rutrum egestas arcu, quis sodales lacus tincidunt ut. Ut tempus metus eget odio efficitur porttitor. Praesent nec bibendum nibh. Maecenas tincidunt quis lectus sit amet consectetur. Integer eget risus id ipsum ultricies placerat ut quis enim. Phasellus fringilla ex nec felis tristique mollis. Nunc vulputate faucibus dignissim. Aliquam erat volutpat. Sed et libero at augue gravida ornare.</p>
+          <h3>Differential expression for SRA data</h3>
+          <h4>An automated protocol to extract differences in gene expression from public NGS datasets.</h4>
+          <p>Please enter comma separated Gene names and SRA accessions for each condition. Also enter an email address to get a notification when your job is done, as this tool will take a while to run. deSRA uses human genome assembly GRCh38 and the most recent annotation release for gene sequences. Read our documentation at <a href="https://github.com/NCBI-Hackathons/deSRA">https://github.com/NCBI-Hackathons/deSRA</a>.</p>
         </div> 
       </div>
 
@@ -69,35 +70,17 @@
 
       <div class="row">
         <div class="usa-width-one-half">
-          <fieldset class="usa-fieldset-inputs usa-sans">
-            <legend>Assembly</legend>
-              <ul class="usa-unstyled-list">
-                <li>
-                  <input id="ch37" type="radio" name="assembly" value="ch37" checked>
-                  <label for="ch37">GRCh37</label>
-                </li>
-                <li>
-                  <input id="ch38" type="radio" name="assembly" value="ch38">
-                  <label for="ch38">GRCh38</label>
-                </li>
-              </ul>
-          </fieldset>
-        </div>
-
+          <p>This request will take a long time to process. Once the results are ready, we will send you a link to your email.</p>
+        </div>  
         <div class="usa-width-one-half">
-           <label for="options">Annotation Release</label>
-            <select name="options" id="options">
-              <option value>- Select -</option>
-              <option value="value1">Option A</option>
-              <option value="value2">Option B</option>
-              <option value="value3">Option C</option>
-            </select>  
-        </div>    
-      </div>
-
-      <div class="usa-width-one-whole">
-          <input type="submit" value="Submit">
+           <label for="email">Email</label>
+          <input id="email" name="email" type="text">
+        </div>
       </div>    
+        <div class="usa-width-one-whole">
+         
+          <input type="submit" value="Submit">
+        </div>    
       </form>
     </div>
   </section>
