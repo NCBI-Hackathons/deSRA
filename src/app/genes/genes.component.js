@@ -20,10 +20,15 @@ var GenesComponent = (function () {
         // set ids before adding new row
         //this.setIDs();
     };
+    GenesComponent.prototype.submitForm = function (form) {
+        // Behind the scenes model
+        console.log(form.value);
+    };
     return GenesComponent;
 }());
 GenesComponent = __decorate([
     core_1.Component({
+        selector: 'genes-output',
         templateUrl: 'app/genes/genes.component.html'
     }),
     __metadata("design:paramtypes", [])

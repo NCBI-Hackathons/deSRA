@@ -3,8 +3,12 @@
  */
 import { Component, OnInit } from '@angular/core';
 import { Http, Response } from '@angular/http';
+
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
+
+
+
 import { NgForm } from '@angular/forms'
 import {GenesComponent} from "./genes/genes.component";
 
@@ -17,15 +21,16 @@ export class GenesService implements OnInit {
     public genes: any[] = [];
 
     pageTitle: string;
+    genesUrl = "http://trace.ncbi.nlm.nih.gov/Traces/sra/";
 
-    private http: Http;
-    genesUrl = "https://trace.ncbi.nlm.nih.gov/Traces/sra/";
-
-    constructor(){
+    // Inject http here
+    constructor(private http: Http){
 
         this.pageTitle = 'Genes from SRA';
 
         this.genes = [];
+
+        this.http.get('http://www.google.com');
     }
 
 
@@ -33,6 +38,7 @@ export class GenesService implements OnInit {
     ngOnInit(){
         // set ids before adding new row
         //this.setIDs();
+        //this.getGenes();
     }
 
 
@@ -43,9 +49,23 @@ export class GenesService implements OnInit {
     //}
 
     // without Observable
-    getGenes() {
-        //return this.http.get<GenesComponent[]>(this.genesUrl, {params: {'sp': 'runinfo', 'acc': 'SRR5970434'}})
-        return this.http.get(this.genesUrl, {params: {'sp': 'runinfo', 'acc': 'SRR5970434'}})
+    getGenes(): Promise<any> {
 
-    }
+        console.log("genesurl in getGenes is: " + this.genesUrl);
+
+        //return this.http.get<GenesComponent[]>(this.genesUrl, {params: {'sp': 'runinfo', 'acc': 'SRR5970434'}}).toPromise();
+        return this.http.post(this.genesUrl, {params: {'sp': 'runinfo', 'acc': 'SRR5970434'}}).toPromise();
+    };
+        //this.http.get(this.genesUrl, {params: {'sp': 'runinfo', 'acc': 'SRR5970434'}});
+        //this.http.get(this.genesUrl);
+
+
+
+    private currentPriceUrl = 'http://api.coindesk.com/v1/bpi/currentprice.json';
+
+
+  getPrice(currency: string): Promise<number> {
+    return this.http.get(this.currentPriceUrl).toPromise()
+      .then(response => response.json().bpi[currency].rate);
+  }
 }
