@@ -39,6 +39,8 @@ MagicBLAST produces a SAM file, which is processed by separate scripts in Docker
 Access website at ...
 You will need gene names and SRR accessions for two alternative conditions. 
 
+How to use comand line util
+
 ## Installation options:
 
 We provide two options for installing deSRA: Docker or directly from Github.
