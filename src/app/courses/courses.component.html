@@ -1,0 +1,191 @@
+<div>
+    <div>
+        {{pageTitle}}
+    </div>
+
+    <h3>Coursework Form</h3>
+
+    <!--
+    <form #form="ngForm" (ngSubmit)="submitForm(form)" novalidate>
+
+            <label for="yearId">Year</label>
+            <input id="yearId" type="text" required name="year" [(ngModel)]="cwmodel.year"/>
+           
+            <label for="courseName">Course</label> 
+-->
+    <!-- (ngModel)="cwmodel.courseName" where courseName MUST match the name attribute -->
+    <!--            <input id="courseName" type="text" required name="courseName" [(ngModel)]="cwmodel.courseName">
+            <label for="gradeId">Grade</label>
+            <input id="gradeId" type="text" required name="grade" [(ngModel)]="cwmodel.grade">
+ 
+         <label>
+            <input type="checkbox" name="isVisible" [(ngModel)]="cwmodel.isVisible"> is visible 
+         </label>
+
+         -->
+    <!--
+         <div class="radio">
+            <label>
+                <input type="radio" name="NIHBiosketch" value="NIH Biosketch" checked>NIH Biosketch
+            </label>
+            <label>
+                <input type="radio" name="NSFBiosketch" value="NSF Biosketch">NSF Biosketch
+            </label>
+         </div>
+
+         <div class="form-group">
+             <label>Degree type</label>
+             <select class="form-control">
+                <option *ngFor="let deg of degrees">
+                    {{ deg }}
+                </option>
+             </select>
+        </div>
+-->
+    <!--         <button type="submit">Ok</button>
+-->
+    <!--<button (click)='addEmptyRow()'>Add a row</button>-->
+
+    <!--   </form>-->
+
+    <!-- One way model binding -->
+    <p>
+        <span>Model:</span> {{ cwmodel | json }}
+    </p>
+    <p>
+        <!-- Angular doesn't see this until you apply to data model, and add ngModel directive in HTML -->
+     <!--   <span>Angular:</span> {{ form.value | json }} -->
+    </p>
+    <p>
+        <span>cwArray:</span> {{ cwArray.value }}
+    </p>
+
+    <!-- whether form has been touched - true or false -->
+    <!-- {{ form.pristine }} -->
+
+    <!-- Here 'form' is an instance of ngForm directive -->
+    <!--<form #form="ngForm" (ngSubmit)="addNewRow(form)" novalidate>-->
+
+    <!--<form #form="ngForm" novalidate> -->
+        <table class='table table-striped table-bordered' *ngIf='cwArray'>
+            <thead>
+                <tr>
+                    <!--<th>
+                            <button class='btn btn-primary'
+                                (click)='toggleImage()'>
+                                {{showImage ? 'Hide' : 'Show'}} Image
+                            </button>
+                        </th>-->
+                    <th scope="col" style="width: 10%">
+                        <input type="checkbox" id="selectedAll" name="selectedAll" [(ngModel)]="selectedAll" (change)="checkAll()" />
+                        <label for="selectedAll">selectedAll</label>
+                        <!-- need to change the label when there are multiple tables -->
+                    </th>
+                    <th scope="col" style="width: 30%">Year</th>
+                    <th scope="col" style="width: 30%">Course</th>
+                    <th scope="col" style="width: 30%">Grade</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr scope="row" *ngFor='let course of cwArray'>
+                    <!--<td>
+                            <img *ngIf='showImage'
+                                 [src]='coursework.imageUrl'
+                                 [title]='coursework.courseworkName | uppercase'
+                                 [style.width.px]='imageWidth' 
+                                 [style.margin.px]='imageMargin'>
+                        </td>-->
+                    <th scope="row">
+                        <input type="checkbox" id="{{course.id}}" name="selected" [(ngModel)]="course.selected">
+                        <label for="{{course.id}}">{{course.id}}</label>
+                    </th>
+
+                    <td *ngIf="course.id === editRowId">
+                        <!--<input type="text" name="year" [(ngModel)]="course.year" [hidden]="!course.isEditable"/>-->
+                        <input id="courseinput" type="text" name="year" [(ngModel)]="course.year" autofocus="autofocus" />
+                    </td>
+                    <td *ngIf="course.id === editRowId">
+                        <input type="text" name="courseName" [(ngModel)]="course.courseName" />
+                    </td>
+                    <td *ngIf="course.id === editRowId">
+                        <input type="text" name="grade" [(ngModel)]="course.grade" />
+                    </td>
+
+                    <!--<td (click)="toggle(form)" [hidden]="course.isEditable" >-->
+                    <td scope="row" *ngIf="course.id !== editRowId" (click)="toggle(course.id)">
+                        {{course.year}}
+                    </td>
+                    <td scope="row" *ngIf="course.id !== editRowId" (click)="toggle(course.id)">
+                        {{course.courseName}}
+                    </td>
+                    <td class="num" *ngIf="course.id !== editRowId" (click)="toggle(course.id)">
+                        {{course.grade}}
+                    </td>
+                    <!--<td><button type="submit" (click)="saveCourse(form)" class="btn btn-primary"><span class="glyphicon glyphicon-ok"></span></button></td>
+                    <td><button class="btn btn-default" (click)="cancel(form)"><span class="glyphicon glyphicon-remove"></span></button></td>-->
+                    <!--
+                        <td><input type="text" required name="year" [ngModel]="course.year" value="{{course.year}}"/></td>
+                        <td><input type="text" required name="courseName" [ngModel]="course.courseName" value="{{course.year}}"/></td>
+                        <td><input type="text" required name="grade" [ngModel]="course.grade" value="{{course.year}}"/></td>
+                        -->
+                </tr>
+
+
+                <!-- <tr>
+                        <td><input /></td>
+                        <td><input /></td>
+                        <td><input /></td>
+                    </tr>-->
+            </tbody>
+        </table>
+
+        <!-- if using fieldset rather than form submit, then below method -->
+        <!--<button (click)='addNewRow(form)'>Add new</button>-->
+    <!--</form> -->
+
+    <!--<button type="submit" (click)="addNewRow()" class="btn btn-primary">Add new course</button> -->
+    <button (click)="addNewRow()" class="btn btn-primary">Add new course</button>
+    <button type="button" (click)="remove()" class="btn btn-primary">Delete</button>
+
+    <h5>Current value of array</h5>
+    <pre>{{cwArray | json}}</pre>
+
+ 
+
+    <input id="date" type="checkbox" name="sort" value="date" checked>
+    <label for="date">Date</label>
+      
+
+    <!-- For hardcoded courses -->
+    <table class='table' *ngIf='courses && courses.length'>
+        <thead>
+            <tr>
+                <!--<th>
+                            <button class='btn btn-primary'
+                                (click)='toggleImage()'>
+                                {{showImage ? 'Hide' : 'Show'}} Image
+                            </button>
+                        </th>-->
+                <th>Year</th>
+                <th>Course</th>
+                <th>Grade</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor='let course of courses'>
+                <!--<td>
+                            <img *ngIf='showImage'
+                                 [src]='coursework.imageUrl'
+                                 [title]='coursework.courseworkName | uppercase'
+                                 [style.width.px]='imageWidth' 
+                                 [style.margin.px]='imageMargin'>
+                        </td>-->
+                <td>{{ course.year }}</td>
+                <td>{{ course.courseName }}</td>
+                <td>{{ course.grade }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+</div>
