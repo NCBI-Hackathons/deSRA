@@ -10,24 +10,40 @@ differential expression of SRA: An automated protocol to extract sequence variat
 ## Website (if applicable)
 
 ## Intro statement
+The differential expression of genes in reaction to an experimental condition can give valuable information on the pathways involved in the reaction. Unfortunately, it currently takes many steps to compare gene expression levels between treatment and control sequencing experiments. This article presents a simple tool to compare expression of genes in selected SRA runs.
 
 ## What's the problem?
 
 ## Why should we solve it?
 
 # What is deSRA?
+The NCBI Sequence Read Archive SRA) provides next generation sequencing data along with sample and project metadata (NCBI Resource Coordinators 2017). As part of the International Nucleotide Sequence Database Collaboration, the SRA supports access to data from a wide variety of experimental types and sequencing instruments. 
+
+This tool assumes that the user has prepared 2 sets of SRA runs reflecting the different treatment conditions being compared. For example, it the user is interested in how genes vary with treatment for HCV, they may be interested in using a BioProject record that links the runs for an experiment (https://www.ncbi.nlm.nih.gov/bioproject/328986). If the user selects the link for SRA experiments, they can view the results in SRA Run Selector, which displays a table including the SRA run accessions and treatment conditions (https://www.ncbi.nlm.nih.gov/sra?linkname=bioproject_sra_all&from_uid=328986). 
 
 Overview Diagram
 
+Build BLAST database
+The accession, start stop positions, and gene ID are pulled from ref_GRCh38.p7_top_level.gff3. Based on those positions, a bash script retrieves the sequences in FASTA format and saves each as an individual BLAST database (Ryan’s script). 
+
+Magic BLAST
+Once user enters the list of gene IDs they are interested in, the set of BLAST databases for those genes is mounted into the active Docker run. The user also enters the SRA accessions (SRR numbers) for treatment runs and experiment runs that they want to compare. MagicBLAST is run iteratively for each gene, once for the treatment runs and once for the experiment runs. 
+magicblast -sra <accession> -db <database_name> (https://ncbi.github.io/magicblast/)
+
+Comparison of gene expression
+MagicBLAST produces a SAM file, which is processed by separate scripts in Docker encoding samtools commands. The SAM file is converted to a BAM file, which is sorted and indexed, and used to generate a pileup. TPM is calculated for the pileups generated from the experimental runs and the control runs, and a volcano plot is used to display the log2 of the TPM ratios.
+
 # How to use deSRA
+Access website at ...
+You will need gene names and SRR accessions for two alternative conditions. 
 
 ## Installation options:
 
-We provide two options for installing <this software>: Docker or directly from Github.
+We provide two options for installing deSRA: Docker or directly from Github.
 
 ### Docker
 
-The Docker image contains <this software> as well as a webserver and FTP server in case you want to deploy the FTP server. It does also contain a web server for testing the <this software> main website (but should only be used for debug purposes).
+The Docker image contains deSRA as well as a webserver and FTP server in case you want to deploy the FTP server. It does also contain a web server for testing the deSRA main website (but should only be used for debug purposes).
 
 1. `docker pull ncbihackathons/<this software>` command to pull the image from the DockerHub
 2. `docker run ncbihackathons/<this software>` Run the docker image from the master shell script
