@@ -13,7 +13,7 @@ var courses_component_1 = require("./courses/courses.component");
 var coursework_list_component_1 = require("./coursework/coursework-list.component");
 var app_component_1 = require("./app.component");
 var genes_component_1 = require("./genes/genes.component");
-var geneservice_component_1 = require("./geneservice/geneservice.component");
+var geneservice_service_1 = require("./geneservice.service");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -25,8 +25,8 @@ AppModule = __decorate([
         declarations: [app_component_1.AppComponent,
             courses_component_1.CoursesComponent,
             coursework_list_component_1.CourseworkListComponent,
-            genes_component_1.GenesComponent,
-            geneservice_component_1.GenesserviceComponent],
+            genes_component_1.GenesComponent],
+        providers: [geneservice_service_1.GenesService],
         bootstrap: [app_component_1.AppComponent]
     })
 ], AppModule);

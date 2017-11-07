@@ -9,7 +9,8 @@ import { CourseworkListComponent } from './coursework/coursework-list.component'
 import { AppComponent }  from './app.component';
 
 import {GenesComponent} from "./genes/genes.component";
-import {GenesserviceComponent} from "./geneservice/geneservice.component";
+
+import {GenesService} from "./geneservice.service";
 
 
 @NgModule({
@@ -17,8 +18,8 @@ import {GenesserviceComponent} from "./geneservice/geneservice.component";
   declarations: [ AppComponent,
                   CoursesComponent,
                   CourseworkListComponent,
-                  GenesComponent,
-                  GenesserviceComponent],
+                  GenesComponent],
+  providers: [GenesService],
   bootstrap: [ AppComponent ]
 })
 export class AppModule {}
