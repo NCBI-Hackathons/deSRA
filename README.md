@@ -1,5 +1,5 @@
 # deSRA
-differential expression of SRA: An automated protocol to extract sequence variation and changes in gene expression from public NGS datasets.
+differential expression of SRA: An automated protocol to extract differencess in gene expression from public NGS datasets.
 
 ![alt text](https://user-images.githubusercontent.com/12971527/32506375-62c19028-c3b2-11e7-9377-848b3e50016e.jpg "Overview Diagram")
 
@@ -13,15 +13,17 @@ differential expression of SRA: An automated protocol to extract sequence variat
 ![alt text](https://user-images.githubusercontent.com/12971527/32507439-6a004156-c3b5-11e7-8298-ced875e54c36.png "alternative graph")
 
 ## Intro statement
-The differential expression of genes in reaction to an experimental condition can give valuable information on the pathways involved in the reaction. Unfortunately, it currently takes many steps to compare gene expression levels between treatment and control sequencing experiments. This article presents a simple tool to compare expression of genes in selected SRA runs.
+The differential expression of genes in reaction to an experimental condition can give valuable information on the pathways involved in the reaction. Unfortunately, it currently takes many steps to compare gene expression levels between Next Generation Sequencing (NGS) data sets. This repository presents code for a simple tool to compare the expression of selected genes between sets of NGS runs, as well as a link to a user friendly web interface.
 
 ## What's the problem?
-Often people interested in gene expression lack the technical skills to make use of resourcs such as magicblast or the SRA tool kit.  deSRA is a tool to bridge this gap between advanced bioinformatic tools and users.
+The NCBI Sequence Read Archive (SRA) provides NGS data along with sample and project metadata (NCBI Resource Coordinators 2017). As part of the International Nucleotide Sequence Database Collaboration, the SRA supports access to data from a wide variety of experimental types and sequencing instruments. 
+
+deSRA bridges this gap between advanced bioinformatic tools and users.
+Often people interested in gene expression lack the technical skills to make use of resources such as magicblast or the SRA tool kit.  
 
 ## Why should we solve it?
 
 # What is deSRA?
-The NCBI Sequence Read Archive SRA) provides next generation sequencing data along with sample and project metadata (NCBI Resource Coordinators 2017). As part of the International Nucleotide Sequence Database Collaboration, the SRA supports access to data from a wide variety of experimental types and sequencing instruments. 
 
 This tool assumes that the user has prepared 2 sets of SRA runs reflecting the different treatment conditions being compared. For example, it the user is interested in how genes vary with treatment for HCV, they may be interested in using a BioProject record that links the runs for an experiment (https://www.ncbi.nlm.nih.gov/bioproject/328986). If the user selects the link for SRA experiments, they can view the results in SRA Run Selector, which displays a table including the SRA run accessions and treatment conditions (https://www.ncbi.nlm.nih.gov/sra?linkname=bioproject_sra_all&from_uid=328986). 
 
