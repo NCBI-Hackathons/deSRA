@@ -32,30 +32,34 @@ function extracCols(path, delemeter, indexArr) {
     input: fs.createReadStream(path)
   });
 
+  let rows = 0;
+
   rl.on('line', line => {
     if (line[0] !== '#') {
       line = line.trim();
       let cols = line.split(delemeter).filter(d => d.length);
       if (cols[2] === 'gene') {
+        rows += 1;
         let c = [];
         for (let i = 0; i < indexArr.length; i++) {
           c.push(cols[indexArr[i]]);
         }
         // console.log(cols);
-        let re = /GeneID:(\d+),/g;
+        let re = /GeneID:(\d+)[,;]/g;
         let re1 = /gene=(\w+)/g;
         let gid = re.exec(cols[cols.length -1]);
         let gn = re1.exec(cols[cols.length -1]);
         if (gid) {
           c.push(gid[1]);
           c.push(gn[1]);
-          console.log(c);
+          // console.log(c);
           ws.write(c.join('\t') + '\n');
         }
       }
     }
   }).on('close', () => {
     console.log('Done extracting!');
+    console.log(rows + ' lines are written!');
   });
 }
 

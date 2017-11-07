@@ -12,6 +12,7 @@ function findOverlap(path) {
   let rl = readline.createInterface({
     input: fs.createReadStream(path)
   });
+  let rows = 0;
   rl.on('line', line => {
     let elems = line.split('\t').filter(d => d.length);
     // console.log(elems);
@@ -19,13 +20,15 @@ function findOverlap(path) {
       res[elems[0]] = [{
         start: elems[1],
         stop: elems[2],
-        geneID: elems[3]
+        geneID: elems[3],
+        geneName: elems[4]
       }];
     } else {
       res[elems[0]].push({
         start: elems[1],
         stop: elems[2],
-        geneID: elems[3]
+        geneID: elems[3],
+        geneName: elems[4]
       });
     }
   }).on('close', () => {
@@ -41,7 +44,7 @@ function findOverlap(path) {
         let gid = a[j].geneID;
         // console.log(gid);
         if (!obj[gid]) {
-          obj[gid] = [[a[j].start, a[j].stop]];
+          obj[gid] = [[a[j].start, a[j].stop, a[j].geneName]];
         } else {
           let n = obj[gid].length;
           let g = obj[gid][n - 1];
@@ -50,7 +53,7 @@ function findOverlap(path) {
           } else if (a[j].start > g.start && a[j].stop < g.stop) {
 
           } else {
-            obj[a[j].geneID].push([a[j].start, a[j].stop]);
+            obj[a[j].geneID].push([a[j].start, a[j].stop, a[j].geneName]);
           }
         }
       }
@@ -74,7 +77,7 @@ function findOverlap(path) {
           //   console.log(chr[gs[j]][k][0]);
           //   console.log(chr[gs[j]][k][1]);
           // }
-          let row = [chrs[i], chr[gs[j]][k][0], chr[gs[j]][k][1], gs[j]];
+          let row = [chrs[i], chr[gs[j]][k][0], chr[gs[j]][k][1], chr[gs[j]][k][2], gs[j]];
           arr.push(row.join('\t') + '\n');
           // if (gs[j] === '473') {
           //   console.log(row);
@@ -82,12 +85,14 @@ function findOverlap(path) {
           //   console.log(chr[gs[j]][k][0]);
           //   console.log(chr[gs[j]][k][1]);
           // }
+          rows += 1;
         }
       }
       ws.write(arr.join(''), () => {
         console.log(chrs[i] + ' has been written.');
         if (i === chrs.length - 1) {
           console.log('All done!');
+          console.log(rows + ' line written.');
         }
       });
     }
