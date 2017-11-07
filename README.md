@@ -2,6 +2,7 @@
 differential expression of SRA: An automated protocol to extract sequence variation and changes in gene expression from public NGS datasets.
 
 ## Awesome Logo
+![alt tag](https://files.slack.com/files-tmb/T7QHB9VUG-F7WCF11PW-55ed870e88/info-flow_1024.jpg "Overview Diagram")
 
 ## Link to DOI
 
@@ -21,8 +22,6 @@ Often people interested in gene expression lack the technical skills to make use
 The NCBI Sequence Read Archive SRA) provides next generation sequencing data along with sample and project metadata (NCBI Resource Coordinators 2017). As part of the International Nucleotide Sequence Database Collaboration, the SRA supports access to data from a wide variety of experimental types and sequencing instruments. 
 
 This tool assumes that the user has prepared 2 sets of SRA runs reflecting the different treatment conditions being compared. For example, it the user is interested in how genes vary with treatment for HCV, they may be interested in using a BioProject record that links the runs for an experiment (https://www.ncbi.nlm.nih.gov/bioproject/328986). If the user selects the link for SRA experiments, they can view the results in SRA Run Selector, which displays a table including the SRA run accessions and treatment conditions (https://www.ncbi.nlm.nih.gov/sra?linkname=bioproject_sra_all&from_uid=328986). 
-
-![alt tag](https://files.slack.com/files-tmb/T7QHB9VUG-F7WCF11PW-55ed870e88/info-flow_1024.jpg "Overview Diagram")
 
 Build BLAST database
 The accession, start stop positions, and gene ID are pulled from ref_GRCh38.p7_top_level.gff3. Based on those positions, a bash script retrieves the sequences in FASTA format and saves each as an individual BLAST database (Ryan’s script). 
