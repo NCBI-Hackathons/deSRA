@@ -2,7 +2,7 @@
 differential expression of SRA: An automated protocol to extract sequence variation and changes in gene expression from public NGS datasets.
 
 ## Awesome Logo
-![alt tag](https://files.slack.com/files-tmb/T7QHB9VUG-F7WCF11PW-55ed870e88/info-flow_1024.jpg "Overview Diagram")
+![alt text](https://user-images.githubusercontent.com/12971527/32506375-62c19028-c3b2-11e7-9377-848b3e50016e.jpg "Overview Diagram")
 
 ## Link to DOI
 
