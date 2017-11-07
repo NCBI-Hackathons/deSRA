@@ -9,6 +9,9 @@ differential expression of SRA: An automated protocol to extract sequence variat
 ### You can make a free DOI with zenodo <link>
 
 ## Website (if applicable)
+![alt text](https://user-images.githubusercontent.com/12971527/32507410-558dd864-c3b5-11e7-9ac7-a038164de797.png "Input page")
+![alt text](https://user-images.githubusercontent.com/12971527/32507427-6280a0ba-c3b5-11e7-8ecb-d24365631596.png "Output page")
+![alt text](https://user-images.githubusercontent.com/12971527/32507439-6a004156-c3b5-11e7-8298-ced875e54c36.png "alternative graph")
 
 ## Intro statement
 The differential expression of genes in reaction to an experimental condition can give valuable information on the pathways involved in the reaction. Unfortunately, it currently takes many steps to compare gene expression levels between treatment and control sequencing experiments. This article presents a simple tool to compare expression of genes in selected SRA runs.
