@@ -13,6 +13,7 @@ differential expression of SRA: An automated protocol to extract sequence variat
 The differential expression of genes in reaction to an experimental condition can give valuable information on the pathways involved in the reaction. Unfortunately, it currently takes many steps to compare gene expression levels between treatment and control sequencing experiments. This article presents a simple tool to compare expression of genes in selected SRA runs.
 
 ## What's the problem?
+Often people interested in gene expression lack the technical skills to make use of resourcs such as magicblast or the SRA tool kit.  deSRA is a tool to bridge this gap between advanced bioinformatic tools and users.
 
 ## Why should we solve it?
 
