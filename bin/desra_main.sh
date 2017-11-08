@@ -11,8 +11,8 @@
 # function:
 #  checks that jobid exists in jobs table of deSRA database
 #  locates jobid, job files: gene_name, sracond1, sracond2, gene database
-#  runs go_mb.sh:
-#   go_mb.sh -d gene_database -s comma_separated_sra_list -w working_dir -o sam_file
+#  runs desra_go_mb.sh:
+#   desra_go_mb.sh -d gene_database -s comma_separated_sra_list -w working_dir -o sam_file
 # 
 # technical notes:
 # create table:
@@ -31,12 +31,12 @@ done
 
 if [ ! ${BIN} ]
 then
-  BIN="/home/ubuntu/data/bin";
+  BIN="/home/biodocker/data/bin";
 fi
 
 if [ ! ${DATA} ]
 then
-  DATA="/home/ubuntu/data";
+  DATA="/home/biodocker/data";
 fi
 
 echo "assembly is [$assembly]"
@@ -118,14 +118,14 @@ then
    	    # echo "path_gene_db is [$path_gene_db]"
    	    # echo "gene_db is [$gene_db]"
   
-  	    # run go_mb.sh for the gene database using sra accession lists
-  	    echo "running cmd: $BIN/go_mb.sh -d $path_gene_db -s $sra_list1 -w $jobid -o $dir/${gene_db}_cond1.bam"
-            # return_code=`$BIN/go_mb.sh -d $path_gene_db -s $sra_list1 -w $jobid -o $dir`
-            # echo "return_code of cmd: [$return_code]"
+  	    # run desra_go_mb.sh for the gene database using sra accession lists
+  	    echo "running cmd: $BIN/desra_go_mb.sh -d $path_gene_db -s $sra_list1 -w $jobid -o $dir/${gene_db}_cond1.bam"
+            return_code=`$BIN/desra_go_mb.sh -d $path_gene_db -s $sra_list1 -w $jobid -o $dir`
+            echo "return_code of cmd: [$return_code]"
   
-  	    echo "running cmd: $BIN/go_mb.sh -d $path_gene_db -s $sra_list2 -w $jobid -o $dir/${gene_db}_cond2.bam"
-            # return_code=`$BIN/go_mb.sh -d $path_gene_db -s $sra_list1 -w $jobid -o $dir`
-            # echo "return_code of cmd: [$return_code]"
+  	    echo "running cmd: $BIN/desra_go_mb.sh -d $path_gene_db -s $sra_list2 -w $jobid -o $dir/${gene_db}_cond2.bam"
+            return_code=`$BIN/desra_go_mb.sh -d $path_gene_db -s $sra_list1 -w $jobid -o $dir`
+            echo "return_code of cmd: [$return_code]"
 	    echo ""
 	    echo ""
   	    done
@@ -138,8 +138,8 @@ then
         done
 fi
 
-echo "preparing to run: ../../venv/bin/python $BIN/calculate_tpm.py"
-# return_code=`../../venv/bin/python $BIN/calculate_tpm.py`
+echo "preparing to run: python3 $BIN/desra_calculate_tpm.py"
+return_code=`python3 $BIN/desra_calculate_tpm.py`
 
 $stop_date=`date` 2> /dev/null;
 stop_seconds=`date -d "$stop_date" +%s`
