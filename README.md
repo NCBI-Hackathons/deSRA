@@ -74,9 +74,9 @@ Launch a website from Docker image!
 `git clone https://github.com/NCBI-Hackathons/deSRA`
 
 # Future Development Plans
-The front end needs to make a call to get the job IDs. Currently the files are put in the /data folder, but they should go into the /jobid folder inside the /data folder. Write a service that creates the folder and returns the job ID, and start the bash script.
-Accept gene IDs in addition to gene names
-Support organism other than human
+The front end needs to make a call to get the job IDs. Currently the files are put in the /data folder, but they should go into the /jobid folder inside the /data folder. Write a service that creates the folder and returns the job ID, and start the bash script. 
+Accept gene IDs in addition to gene names  
+Support organisms other than human  
 
 ### Output with simulated volcano plot
 ![alt text](https://user-images.githubusercontent.com/12971527/32507427-6280a0ba-c3b5-11e7-8ecb-d24365631596.png "Output page")
