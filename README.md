@@ -46,7 +46,15 @@ MagicBLAST produces a SAM file, which is processed by separate scripts in Docker
 ![alt text](https://user-images.githubusercontent.com/12971527/32568276-c0a25ab8-c48b-11e7-8143-08cebecc6b1c.png "Input page")
 
 # Project team
-
+John Garner
+Mingzhang Yang
+Eneida Hatcher
+Anna-Leigh Brown
+Peter Meric
+Roberto Vera Alvarez
+Ryan Connor
+Nora Husain
+Aynex Mercado
 
 # How to use deSRA
 Launch a website from Docker image!  
