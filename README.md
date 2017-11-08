@@ -37,13 +37,16 @@ The first step to running the tool is to build BLAST databases for each of the i
 Magic BLAST  
 MagicBLAST is run iteratively for each gene, once for the treatment runs and once for the experiment runs. 
 The general format for running the magicBLAST command is:  
-magicblast -sra <accession> -db <database_name> 
+`magicblast -sra <accession> -db <database_name>` 
 See more at https://ncbi.github.io/magicblast/
 
 Comparison of gene expression  
 MagicBLAST produces a SAM file, which is processed by separate scripts in Docker encoding samtools commands. The SAM file is converted to a BAM file, which is sorted and indexed, and used to generate a pileup. TPM is calculated for the pileups generated from the experimental runs and the control runs, and a volcano plot is used to display the log2 of the TPM ratios.
 
 ![alt text](https://user-images.githubusercontent.com/12971527/32568276-c0a25ab8-c48b-11e7-8143-08cebecc6b1c.png "Input page")
+
+# Project team
+
 
 # How to use deSRA
 Launch a website from Docker image!  
@@ -74,9 +77,10 @@ How to use the command line utility:
 `git clone https://github.com/NCBI-Hackathons/deSRA`
 
 # Future Development Plans
+The front end needs to make a call to get the job IDs. Currently the files are put in the /data folder, but they should go into the /jobid folder inside the /data folder. Write a service that creates the folder and returns the job ID, and start the bash script.
+Accept gene IDs in addition to gene names
+Support organism other than human
+
 
 ![alt text](https://user-images.githubusercontent.com/12971527/32507427-6280a0ba-c3b5-11e7-8ecb-d24365631596.png "Output page")
 ![alt text](https://user-images.githubusercontent.com/12971527/32507439-6a004156-c3b5-11e7-8298-ced875e54c36.png "alternative graph")
-
-  1. Accept HUGO gene names in addition to gene IDs
-  2. Support organisms other than human
