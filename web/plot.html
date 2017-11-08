@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>deSRA plot</title>
+    <script src="drawPlots.js"></script>
+    <script src="sampleData.js"></script>
+    <style>
+        svg {
+            background-color: #00A000;
+        }
+        svg line {
+            stroke: black;
+            stroke-width: 4px;
+        }
+        svg .marks {
+            fill: transparent;
+        }
+    </style>
+</head>
+<body>
+<div id="plot"></div>
+<script>
+    let div = document.getElementById('plot');
+    div.innerHTML = plotA(data);
+</script>
+
+</body>
+</html>
