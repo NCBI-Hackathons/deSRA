@@ -55,18 +55,19 @@ function tagHouse(obj) {
 //   y2: 60
 // }));
 
-function plotA(data, svg, opts) {
+function plotA(data, opts) {
   opts = opts || {};
-  let margin = opts.margin || 20;
-  let space = opts.space || 5; // space between axis and plot area
+  let margin = opts.margin || 50;
+  let space = opts.space || 30; // space between axis and plot area
   let title = opts.title || '';
   let xAxisTitle = opts.xAxisTitle || '';
   let yAxisTitle = opts.yAxisTitle || '';
   let axisTitleSize = opts.axisTitleSize || 20;
-  let dotSize = opts.dotSize || 4;
+  let dotSize = opts.dotSize || 8;
+  let id = opts.id || 'svg-plot-generated';
 
-  let width = +(svg.getAttribute('width'));
-  let height = +(svg.getAttribute('height'));
+  let width = opts.width || 1100;
+  let height = opts.height || 900;
   let h = height - margin * 2;
   let w = width - margin * 2;
 
@@ -86,14 +87,17 @@ function plotA(data, svg, opts) {
 
   let yScale = Scale(domain, yRange);
 
-  let content = '';
+  let content = '<svg id="' + id +'" width="' + width + '" height="' + height + '">';
 
-  let xAxis = `<line id="xAxis" x1="0" y1="${h + space}" x2="w" y2="${h + space}"></line>`;
-  let yAxis = `<line id="yAxis" x1="${-space}" y1="0" x2="${-space}" y2="h"></line>`;
+  let xAxis = `<line id="xAxis" x1="0" y1="${h + space}" x2="${w}" y2="${h + space}"></line>`;
+  let yAxis = `<line id="yAxis" x1="${-space}" y1="0" x2="${-space}" y2="${h}"></line>`;
   content += '<g id="axes"' +
-    ' transform="translate(${translate.x},${translate.y})" stroke="black"' +
+    ` transform="translate(${translate.x},${translate.y})" stroke="black"` +
     ' stroke-width="3">' + xAxis + yAxis + '</g>';
 
+  content += '<g id="plot-area"' +
+    ` transform="translate(${translate.x},${translate.y})" stroke="black"` +
+    ' stroke-width="3">';
   for (let i = 0; i < data.length; i++) {
     let p1 = {
       x: 0.25 * w,
@@ -103,12 +107,14 @@ function plotA(data, svg, opts) {
       x: 0.75 * w,
       y: yScale(data[i].TPM2)
     };
-    let dot1 = `<rect class="TPM1" x="${p1.x - dotSize}" y="${p1.y - dotSize}" width="${2 * dotSize}" height="${2 * dotSize}"></rect>`;
-    let dots = `<circle class="TPM2" cx="${p2.x}" cy="${p2.y}" r="${dotSize}">`;
+    let dot1 = `<rect class="TPM1 marks" x="${p1.x - dotSize}" y="${p1.y - dotSize}" 
+width="${2 * dotSize}" height="${2 * dotSize}"></rect>`;
+    let dot2 = `<circle class="TPM2 marks" cx="${p2.x}" cy="${p2.y}" 
+r="${dotSize}">`;
     let line = `<line class="connection-line" x1="${p1.x}" y1="${p1.y}" x2="${p2.x}" y2="${p2.y}"></line>`;
     content += '<g id="${data[i].gene_id}">' + line + dot1 + dot2 + '</g>';
   }
-  svg.innerHTML = content;
+  return content + '</svg>';
 }
 
 function plotB(data, ctx) {
