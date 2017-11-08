@@ -21,7 +21,7 @@ deSRA facilitates the interrogation of SRA datasets for differential gene expres
 ![alt text](https://user-images.githubusercontent.com/12971527/32507427-6280a0ba-c3b5-11e7-8ecb-d24365631596.png "Output page")
 ![alt text](https://user-images.githubusercontent.com/12971527/32507439-6a004156-c3b5-11e7-8298-ced875e54c36.png "alternative graph")
 
-## Intro
+## Introduction
 The differential expression of genes in response to an experimental condition can give valuable information on the pathways involved in the reaction. Unfortunately, it currently takes many steps to compare gene expression levels between Next Generation Sequencing (NGS) data sets. This repository presents code for a simple tool to compare the expression of selected genes between sets of NGS runs, as well as a link to a user friendly web interface.
 
 ## What's the problem?
@@ -69,7 +69,7 @@ We provide two options for installing deSRA: Docker or directly from Github.
 3. Build Docker images for Entrez-Direct
  `docker build -t biocontainers/entrez-direct sandbox/entrez-direct/7.50.20171103/`
 
-### Installing ProjectForklift from Github
+### Installing deSRA from Github
 
 1. `git clone https://github.com/NCBI-Hackathons/ProjectForklift`
 
@@ -101,4 +101,7 @@ There is also a Docker image for hosting the main website. This should only be u
   3. `docker build --rm -t <this software>/website .`
   4. `docker run -t -i <this software>/website`
 
+# Future Development PLans
 
+  1. Accept HUGO gene names in addition to gene IDs
+  2. Support organisms other than human
