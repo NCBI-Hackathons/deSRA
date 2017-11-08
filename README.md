@@ -53,15 +53,14 @@ Ryan Connor
 Nora Husain  
 Aynex Mercado  
    
-### Installation options:
+# Installation options:
 We provide two options for installing deSRA: Docker or directly from Github. 
 
 ## How to use deSRA
 You will need gene names and SRR accessions for two alternative conditions.
 Launch a website from Docker image!  
 
-#### Docker
-
+## Docker
 1. Clone BioContainers Sandbox:
     `git clone https://github.com/BioContainers/sandbox`
 
@@ -71,8 +70,7 @@ Launch a website from Docker image!
 3. Build Docker images for Entrez-Direct
  `docker build -t biocontainers/entrez-direct sandbox/entrez-direct/7.50.20171103/`
 
-### Installing deSRA from Github
-
+## Installing deSRA from Github
 `git clone https://github.com/NCBI-Hackathons/deSRA`
 
 # Future Development Plans
@@ -80,7 +78,7 @@ The front end needs to make a call to get the job IDs. Currently the files are p
 Accept gene IDs in addition to gene names
 Support organism other than human
 
-# Simulated output
+# Output with simulated volcano plot
 ![alt text](https://user-images.githubusercontent.com/12971527/32507427-6280a0ba-c3b5-11e7-8ecb-d24365631596.png "Output page")
-# Actual output
+# Actual plot!
 ![alt text](https://user-images.githubusercontent.com/12971527/32576997-9262f214-c4a6-11e7-964d-e4c4d48a631b.png "alternative graph")
