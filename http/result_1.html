@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html lang="en"  >
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>
+    deSRA - NCBI
+  </title>
+
+  <link href="css/uswds.min.css" rel="stylesheet" type="text/css"/>
+  <link href="css/genes-styles.css" rel="stylesheet" type="text/css"/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css"/>
+
+  <script src="../web/drawPlots.js"></script>
+  <script src="../web/results_2.js"></script>
+  <style>
+    #svg-plot {
+      margin: auto;
+      width: 800px;
+    }
+  </style>
+
+</head>
+<body>
+  <header class="ncbi-header" role="banner">
+    <div class="usa-grid">
+      <div class="usa-width-one-whole">
+        <div class="agencies">
+        <div class="nih"><span class="usa-sr-only">National Institutes of Health</span></div>
+        <div class="nlm">U.S. National Library of Medicine</div>
+        <div class="ncbi">National Center for Biotechnology Information</div>
+        <a href="/" class="homepage"><span class="usa-sr-only" id="header_ncbi">NCBI homepage</span></a>
+      </div>
+    </div>
+  </header>
+
+  <div id="svg-plot"></div>
+
+  <section>
+      <div  class="row">
+        <div class="usa-width-one-whole">
+          <div  class="seq-viewer"> 
+            <p>Select a gene ID to view the sequence viewer.</p>
+          </div>
+        </div>
+      </div>
+  </section>
+
+  <script src="js/uswds.min.js"></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script>
+    let div = document.getElementById('svg-plot');
+    div.innerHTML = plotA(data);
+    let svg = document.getElementById('svg-plot-generated');
+    addDynamic(svg);
+  </script>
+</body>
+</html>
+
