@@ -33,14 +33,14 @@ The amount of NGS data stored in the Sequence Read Archive (SRA) data-base is gr
 
 This tool assumes that the user has prepared 2 sets of SRA runs reflecting the different treatment conditions being compared. For example, it the user is interested in how genes vary with treatment for HCV, they may be interested in using a BioProject record that links the runs for an experiment (https://www.ncbi.nlm.nih.gov/bioproject/328986). If the user selects the link for SRA experiments, they can view the results in SRA Run Selector, which displays a table including the SRA run accessions and treatment conditions (https://www.ncbi.nlm.nih.gov/sra?linkname=bioproject_sra_all&from_uid=328986). 
 
-Build BLAST database
+Build BLAST database  
 The accession, start stop positions, and gene ID are pulled from ref_GRCh38.p7_top_level.gff3. Based on those positions, a bash script retrieves the sequences in FASTA format and saves each as an individual BLAST database (Ryan’s script). 
 
-Magic BLAST
+Magic BLAST  
 Once user enters the list of gene IDs they are interested in, the set of BLAST databases for those genes is mounted into the active Docker run. The user also enters the SRA accessions (SRR numbers) for treatment runs and experiment runs that they want to compare. MagicBLAST is run iteratively for each gene, once for the treatment runs and once for the experiment runs. 
 magicblast -sra <accession> -db <database_name> (https://ncbi.github.io/magicblast/)
 
-Comparison of gene expression
+Comparison of gene expression  
 MagicBLAST produces a SAM file, which is processed by separate scripts in Docker encoding samtools commands. The SAM file is converted to a BAM file, which is sorted and indexed, and used to generate a pileup. TPM is calculated for the pileups generated from the experimental runs and the control runs, and a volcano plot is used to display the log2 of the TPM ratios.
 
 ![alt text](https://user-images.githubusercontent.com/12971527/32568276-c0a25ab8-c48b-11e7-8143-08cebecc6b1c.png "Input page")
