@@ -1,1 +1,3 @@
-docker
+pysam
+numpy
+scipy
