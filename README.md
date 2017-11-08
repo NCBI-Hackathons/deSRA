@@ -60,18 +60,18 @@ We provide two options for installing deSRA: Docker or directly from Github.
 You will need gene names and SRR accessions for two alternative conditions.
 Launch a website from Docker image!  
 
-## Docker
-1. Clone BioContainers Sandbox:
-    `git clone https://github.com/BioContainers/sandbox`
-
-2. Build Docker images for magicblast
-    `docker build -t biocontainers/magicblast sandbox/magicblast/1.3.0/`
-
-3. Build Docker images for Entrez-Direct
- `docker build -t biocontainers/entrez-direct sandbox/entrez-direct/7.50.20171103/`
-
 ## Installing deSRA from Github
 `git clone https://github.com/NCBI-Hackathons/deSRA`
+`docker build -t biocontainers/desra deSRA`
+
+## Preparing the database
+Creates a working directory `data`
+`wget ftp://ftp.ncbi.nlm.nih.gov/genomes/Homo_sapiens/GFF/ref_GRCh38.p7_top_level.gff3.gz`
+`gunzip ref_GRCh38.p7_top_level.gff3.gz`
+`docker run -it -v data:/data biocontainers/desra desra_pre-process.sh /data/ref_GRCh38.p7_top_level.gff3`
+
+## Running the docker image
+`docker run -d -p 8000:8000 -v /home/ubuntu/data:/data biocontainers/desra`
 
 # Future Development Plans
 The front end needs to make a call to get the job IDs. Currently the files are put in the /data folder, but they should go into the /jobid folder inside the /data folder. Write a service that creates the folder and returns the job ID, and start the bash script. 
