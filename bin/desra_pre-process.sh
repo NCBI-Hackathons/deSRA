@@ -2,7 +2,6 @@
 # pre-process.sh   # Download fasta files for genes and created blastdb
 #
 #
-# makeblastdb.sh -d  directory_with_fasta_files
 
 while getopts d:t: o           # opts followed by ":" will have an argument
 do      case "$o" in
@@ -15,10 +14,10 @@ done
 
 if [ ! ${BIN} ]
 then
-  BIN="/home/ubuntu/data/bin";
+  BIN="/home/biodocker/bin";
 fi
 
-nodejs $BIN/extractColumns.js $gff_file
+nodejs $BIN/desra_extractColumns.js $gff_file
 
 if [ -e ${dir} ]
 then
@@ -41,7 +40,7 @@ do
 	cd ${GENE_name}
   # echo "GENE_name is $GENE_name"
   efetch -db nuccore -id $ACC -format fasta -seq_start $START -seq_stop $STOP > ${GENE_name}_${GID}_${START}_${STOP}.fasta
-	makeblastdb -in ${GENE_name}_${GID}_${START}_${STOP}.fasta -out ${GENE_name}_${GID}_${START}_${STOP} -title ${GENE_name}_${GID}_${START}_${STOP} -parse_seqids -dbtype nucl
+  makeblastdb -in ${GENE_name}_${GID}_${START}_${STOP}.fasta -out ${GENE_name}_${GID}_${START}_${STOP} -title ${GENE_name}_${GID}_${START}_${STOP} -parse_seqids -dbtype nucl
   cd ..
 done
 
