@@ -20,10 +20,7 @@ https://ncbi-hackathons.github.io/deSRA/http/
 The differential expression of genes in response to an experimental condition can give valuable information on the pathways involved in the reaction. Unfortunately, it currently takes many steps to compare gene expression levels between Next Generation Sequencing (NGS) data sets. This repository presents code for a simple tool to compare the expression of selected genes between sets of NGS runs, as well as a link to a user friendly web interface.
 
 ## What's the problem?
-The NCBI Sequence Read Archive (SRA) provides NGS data along with sample and project metadata (NCBI Resource Coordinators 2017). As part of the International Nucleotide Sequence Database Collaboration, the SRA supports access to data from a wide variety of experimental types and sequencing instruments. 
-
-deSRA bridges this gap between advanced bioinformatic tools and users.
-Often people interested in gene expression lack the technical skills to make use of resources such as magicblast or the SRA tool kit.  
+The NCBI Sequence Read Archive (SRA) provides NGS data along with sample and project metadata (NCBI Resource Coordinators 2017). As part of the International Nucleotide Sequence Database Collaboration, the SRA supports access to data from a wide variety of experimental types and sequencing instruments. Unfortunaltely, it can be time-consuming and difficult to access and analyze the data, especially if you want to quickly develop meaningful hypotheses. deSRA bridges this gap between advanced bioinformatic data and users.
 
 ## Why should we solve it?
 The amount of NGS data stored in the Sequence Read Archive (SRA) data-base is growing rapidly. However, many researchers who are interested in this data do not have experience with the tools necessary to analyze it effectively. deSRA increases the utility and return on investment of NGS projects by making the data more accessible to a wider range of individuals.
@@ -45,29 +42,23 @@ MagicBLAST produces a SAM file, which is processed by separate scripts in Docker
 
 ![alt text](https://user-images.githubusercontent.com/12971527/32568276-c0a25ab8-c48b-11e7-8143-08cebecc6b1c.png "Input page")
 
-# Project team
-John Garner
-Mingzhang Yang
-Eneida Hatcher
-Anna-Leigh Brown
-Peter Meric
-Roberto Vera Alvarez
-Ryan Connor
-Nora Husain
-Aynex Mercado
+# Project team     
+John Garner  
+Mingzhang Yang  
+Eneida Hatcher  
+Anna-Leigh Brown  
+Peter Meric  
+Roberto Vera Alvarez  
+Ryan Connor  
+Nora Husain  
+Aynex Mercado  
+   
+### Installation options:
+We provide two options for installing deSRA: Docker or directly from Github. 
 
-# How to use deSRA
+## How to use deSRA
+You will need gene names and SRR accessions for two alternative conditions.
 Launch a website from Docker image!  
-
-You will need gene names and SRR accessions for two alternative conditions. 
-
-## Installation options:
-
-We provide two options for installing deSRA: Docker or directly from Github.
-
-How to use the command line utility:  
-
-### Requirements
 
 #### Docker
 
