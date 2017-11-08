@@ -7,7 +7,10 @@ function Scale(domain, range) {
   let ratio = (range[1] - range[0]) / (domain[1] - domain[0]);
   return function (x) {
     if (x < domain[0] || x > domain[1]) {
-      throw new Error('Out of domain!');
+      console.log('Input is ', x);
+      console.log('Domain is ', domain);
+      x = x < domain[0] ? domain[0] : x;
+      x = x > domain[1] ? domian[1] : x;
     }
     return range[0] + ratio * (x - domain[0]);
   }
@@ -19,8 +22,25 @@ function Scale(domain, range) {
 // console.log(s(8));
 
 function setDomain(arr) {
-
+  let min = +Infinity;
+  let max = -Infinity;
+  let a = [];
+  for (let i = 0; i < arr.length; i++) {
+    a.push(arr[i].TPM1);
+    a.push(arr[i].TPM2);
+  }
+  for (let i = 0; i < a.length; i++) {
+    if (min > a[i]) {
+      min = a[i];
+    }
+    if (max < a[i]) {
+      max = a[i];
+    }
+  }
+  return [Math.floor(min), Math.ceil(max)];
 }
+
+
 
 function tagHouse(obj) {
   let res = '<' + obj.type;
@@ -82,7 +102,8 @@ function plotA(data, opts) {
     y: (height - h) / 2
   };
 
-  let domain = [0, 25];
+  // let domain = [0, 25];
+  let domain = setDomain(data);
   let yRange = [h, 0];
 
   let yScale = Scale(domain, yRange);
@@ -93,18 +114,19 @@ function plotA(data, opts) {
   let yAxis = `<line id="yAxis" x1="${-space}" y1="0" x2="${-space}" y2="${h}"></line>`;
 
   yAxis += `<text id="yAxisTitle" x="${0}" y="${0}" text-anchor="middle" stroke-width="0.5"
-alignment-baseline="central" transform="translate(${-80} ${h/2}) rotate(270)">SRA Expression (units)</text>`;
+alignment-baseline="central" transform="translate(${-120} ${h/2}) rotate(270)">TPM (arbitrary units)</text>`;
 
-  let ticks = '<g id="ticks" stroke-width="0.5" font-size="16" text-anchor="end">';
+  let ticks = '<g id="ticks" stroke-width="0.5" font-size="16">';
 
   for (let i = 0; i < 6; i++) {
-    let d = (domain[1] - domain[0]) / 5;
-    let py = yScale(d * i);
-    let pText = d * i;
-    ticks += `<text x="${-space - 10}" y="${py}" alignment-baseline="hanging">${pText}</text>`;
+    let d = Math.floor((domain[1] - domain[0]) / 5);
+    // console.log(d);
+    let py = yScale(d * i + domain[0]);
+    let pText = d * i + domain[0];
+    ticks += `<text x="${-space - 10}" y="${py}" text-anchor="end" alignment-baseline="hanging">${pText}</text>`;
   }
-  ticks += `<text x="${0.25 * w}" y="${h + space + 20}">N</text>`;
-  ticks += `<text x="${0.75 * w}" y="${h + space + 20}">T</text>`;
+  ticks += `<text x="${0.25 * w}" y="${h + space + 20}" text-anchor="middle">N</text>`;
+  ticks += `<text x="${0.75 * w}" y="${h + space + 20}" text-anchor="middle">T</text>`;
   ticks += '</g>';
 
   content += '<g id="axes"' +
@@ -133,11 +155,11 @@ x2="${p2.x}" y2="${p2.y}" stroke-opacity="0"></line>`;
   }
 
   let info = `<g id="info-area" stroke-width="0.5" font-size="14px">`;
-  info += `<text id="gene-name-info" x="${w + margin + 20}" y="${height / 2 + 20}"></text>`;
-  info += `<text id="gene-id-info" x="${w + margin + 20}" y="${height / 2 + 50}"></text>`;
-  info += `<text id="TPM1-info" x="${w + margin + 20}" y="${height / 2 + 80}"></text>`;
-  info += `<text id="TPM2-info" x="${w + margin + 20}" y="${height / 2 + 110}"></text>`;
-  info += `<text id="PValue-info" x="${w + margin + 20}" y="${height / 2 + 140}"></text>`;
+  info += `<text id="gene-name-info" x="${w + 10}" y="${h / 2 - 40}"></text>`;
+  info += `<text id="gene-id-info" x="${w + 10}" y="${h / 2 - 10}"></text>`;
+  info += `<text id="TPM1-info" x="${w + 10}" y="${h / 2 + 20}"></text>`;
+  info += `<text id="TPM2-info" x="${w + 10}" y="${h / 2 + 50}"></text>`;
+  info += `<text id="PValue-info" x="${w + 10}" y="${h / 2 + 80}"></text>`;
   info += '</rect></g>';
   return content + info + '</svg>';
 }
