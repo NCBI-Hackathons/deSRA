@@ -45,14 +45,15 @@ Comparison of gene expression
 MagicBLAST produces a SAM file, which is processed by separate scripts in Docker encoding samtools commands. The SAM file is converted to a BAM file, which is sorted and indexed, and used to generate a pileup. TPM is calculated for the pileups generated from the experimental runs and the control runs, and a volcano plot is used to display the log2 of the TPM ratios.
 
 # How to use deSRA
-Access website at ...
-You will need gene names and SRR accessions for two alternative conditions. 
+Launch a website from Docker image!  
 
-How to use comand line util
+You will need gene names and SRR accessions for two alternative conditions. 
 
 ## Installation options:
 
 We provide two options for installing deSRA: Docker or directly from Github.
+
+How to use the command line utility:  
 
 ### Requirements
 
@@ -69,35 +70,7 @@ We provide two options for installing deSRA: Docker or directly from Github.
 
 ### Installing deSRA from Github
 
-1. `git clone https://github.com/NCBI-Hackathons/ProjectForklift`
-
-### Configuration
-
-```Examples here```
-
-# Testing
-
-We tested four different tools with <this software>. They can be found in [server/tools/](server/tools/) . 
-
-# Additional Functionality
-
-### DockerFile
-
-<this software> comes with a Dockerfile which can be used to build the Docker image.
-
-  1. `git clone https://github.com/NCBI-Hackathons/<this software>.git`
-  2. `cd server`
-  3. `docker build --rm -t <this software>/<this software> .`
-  4. `docker run -t -i <this software>/<this software>`
-  
-### Website
-
-There is also a Docker image for hosting the main website. This should only be used for debug purposes.
-
-  1. `git clone https://github.com/NCBI-Hackathons/<this software>.git`
-  2. `cd Website`
-  3. `docker build --rm -t <this software>/website .`
-  4. `docker run -t -i <this software>/website`
+1. `git clone https://github.com/NCBI-Hackathons/deSRA`
 
 # Future Development Plans
 
