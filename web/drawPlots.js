@@ -22,6 +22,39 @@ function setDomain(arr) {
 
 }
 
+function tagHouse(obj) {
+  let res = '<' + obj.type;
+  let props = Object.keys(obj);
+  let children;
+  for (let i = 0; i < props.length; i++) {
+    if (props[i] === 'type') {
+      continue;
+    }
+    if (props[i] === 'child') {
+      children = obj.child;
+      continue;
+    }
+    res += ' ' + props[i] + '=' + '"' + obj[props[i]] + '"';
+  }
+  res += '>';
+  if (children) {
+    for (let k = 0; k < children.length; k++) {
+      res += tagHouse(obj);
+    }
+  }
+  return res + '</' + obj.type + '>';
+}
+
+// console.log(tagHouse({
+//   type: 'line',
+//   id: 'test',
+//   class: 'svg-line',
+//   x1: 20,
+//   y1: 20,
+//   x2: 60,
+//   y2: 60
+// }));
+
 function plotA(data, svg, opts) {
   opts = opts || {};
   let margin = opts.margin || 20;
@@ -75,7 +108,7 @@ function plotA(data, svg, opts) {
     let line = `<line class="connection-line" x1="${p1.x}" y1="${p1.y}" x2="${p2.x}" y2="${p2.y}"></line>`;
     content += '<g id="${data[i].gene_id}">' + line + dot1 + dot2 + '</g>';
   }
-
+  svg.innerHTML = content;
 }
 
 function plotB(data, ctx) {
