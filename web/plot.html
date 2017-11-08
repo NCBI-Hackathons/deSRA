@@ -7,15 +7,20 @@
     <script src="sampleData.js"></script>
     <style>
         svg {
-            background-color: #00A000;
+            background-color: gainsboro;
         }
-        svg line {
-            stroke: black;
-            stroke-width: 4px;
-        }
-        svg .marks {
-            fill: transparent;
-        }
+        /*svg line {*/
+            /*stroke: black;*/
+            /*!*stroke-width: 4px;*!*/
+        /*}*/
+        /*svg .marks {*/
+            /*fill: transparent;*/
+            /*!*stroke-opacity: 0;*!*/
+        /*}*/
+        /*svg .connection-line {*/
+            /*stroke-opacity: 0;*/
+        /*}*/
+
     </style>
 </head>
 <body>
@@ -23,6 +28,8 @@
 <script>
     let div = document.getElementById('plot');
     div.innerHTML = plotA(data);
+    let svg = document.getElementById('svg-plot-generated');
+    addDynamic(svg);
 </script>
 
 </body>
