@@ -14,6 +14,7 @@ deSRA facilitates the interrogation of SRA datasets for differential gene expres
 
 ## Website
 
+(Not fully functional yet i.e. does not accept submissions yet)
 https://ncbi-hackathons.github.io/deSRA/http/
 
 ## Introduction
