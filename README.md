@@ -13,9 +13,8 @@ deSRA facilitates the interrogation of SRA datasets for differential gene expres
 ![alt text](https://user-images.githubusercontent.com/12971527/32574712-ff0dbfb8-c49f-11e7-8404-1e209a51c5c0.png "Overview Diagram")
 
 ## Website
-![alt text](https://user-images.githubusercontent.com/12971527/32568276-c0a25ab8-c48b-11e7-8143-08cebecc6b1c.png "Input page")
-![alt text](https://user-images.githubusercontent.com/12971527/32507427-6280a0ba-c3b5-11e7-8ecb-d24365631596.png "Output page")
-![alt text](https://user-images.githubusercontent.com/12971527/32507439-6a004156-c3b5-11e7-8298-ced875e54c36.png "alternative graph")
+
+https://ncbi-hackathons.github.io/deSRA/http/
 
 ## Introduction
 The differential expression of genes in response to an experimental condition can give valuable information on the pathways involved in the reaction. Unfortunately, it currently takes many steps to compare gene expression levels between Next Generation Sequencing (NGS) data sets. This repository presents code for a simple tool to compare the expression of selected genes between sets of NGS runs, as well as a link to a user friendly web interface.
@@ -43,6 +42,8 @@ magicblast -sra <accession> -db <database_name> (https://ncbi.github.io/magicbla
 
 Comparison of gene expression
 MagicBLAST produces a SAM file, which is processed by separate scripts in Docker encoding samtools commands. The SAM file is converted to a BAM file, which is sorted and indexed, and used to generate a pileup. TPM is calculated for the pileups generated from the experimental runs and the control runs, and a volcano plot is used to display the log2 of the TPM ratios.
+
+![alt text](https://user-images.githubusercontent.com/12971527/32568276-c0a25ab8-c48b-11e7-8143-08cebecc6b1c.png "Input page")
 
 # How to use deSRA
 Launch a website from Docker image!  
@@ -73,6 +74,9 @@ How to use the command line utility:
 `git clone https://github.com/NCBI-Hackathons/deSRA`
 
 # Future Development Plans
+
+![alt text](https://user-images.githubusercontent.com/12971527/32507427-6280a0ba-c3b5-11e7-8ecb-d24365631596.png "Output page")
+![alt text](https://user-images.githubusercontent.com/12971527/32507439-6a004156-c3b5-11e7-8298-ced875e54c36.png "alternative graph")
 
   1. Accept HUGO gene names in addition to gene IDs
   2. Support organisms other than human
