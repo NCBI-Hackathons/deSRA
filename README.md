@@ -81,4 +81,4 @@ Support organisms other than human
 ### Output with simulated volcano plot
 ![alt text](https://user-images.githubusercontent.com/12971527/32578450-459fad3c-c4ab-11e7-8c9a-41fed0d965a8.png "Output page")
 ### Actual plot!
-![alt text](https://user-images.githubusercontent.com/12971527/32576997-9262f214-c4a6-11e7-964d-e4c4d48a631b.png "alternative graph")
+![alt text](https://user-images.githubusercontent.com/12971527/32578554-aa211b1a-c4ab-11e7-9a56-782cf122c86d.png "alternative graph")
