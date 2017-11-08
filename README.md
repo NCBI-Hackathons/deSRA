@@ -17,7 +17,7 @@ deSRA facilitates the interrogation of SRA datasets for differential gene expres
 ### You can make a free DOI with zenodo <link>
 
 ## Website
-![alt text](https://user-images.githubusercontent.com/12971527/32507410-558dd864-c3b5-11e7-9ac7-a038164de797.png "Input page")
+![alt text](https://user-images.githubusercontent.com/12971527/32568276-c0a25ab8-c48b-11e7-8143-08cebecc6b1c.png "Input page")
 ![alt text](https://user-images.githubusercontent.com/12971527/32507427-6280a0ba-c3b5-11e7-8ecb-d24365631596.png "Output page")
 ![alt text](https://user-images.githubusercontent.com/12971527/32507439-6a004156-c3b5-11e7-8298-ced875e54c36.png "alternative graph")
 
