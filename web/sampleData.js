@@ -46,7 +46,7 @@ let data = [
     'start':487055,
     'end':490819,
     'chr':'NC_000001.11',
-    'TPM1':32.12,
+    'TPM1':22.12,
     'TPM2':8.56,
     'PValue':1.67E-16,
     'BAM1':'CICP7_1_sorted.bam',
