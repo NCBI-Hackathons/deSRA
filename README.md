@@ -1,5 +1,5 @@
 # deSRA
-differential expression of SRA: An automated protocol to extract differencess in gene expression from public NGS datasets.
+differential expression of SRA: An automated protocol to extract differences in gene expression from public NGS datasets.
 
 ## Background
 The future of biomedical research depends on the ability to rapidly access and analyze Next-Generation Sequencing (NGS) data stored at the NCBI’s Sequence Read Archive (SRA). NGS provides an unprecedented level of resolution, allowing researchers to ask previously unanswerable questions such as how cancer pathogenesis might be mediated by very small changes in gene expression.
