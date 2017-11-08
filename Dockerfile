@@ -85,6 +85,8 @@ RUN cd $DST && \
 	mv $DST/$FOLDER/web/* /home/biodocker/web/ && \
 	rm -rf $DST/$FOLDER
 
+ENV DB=/data/db.sqlite3
+ENV WORKDIR=/data
 WORKDIR /data/
 
 CMD [""]

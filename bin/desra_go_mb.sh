@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # go_mb.sh # magicblast wrapper
 #	   # get input: db and comma_separated_sra_list
 #	   # run magicblast using db and comma_separated_sra_list

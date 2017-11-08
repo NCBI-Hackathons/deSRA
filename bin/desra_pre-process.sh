@@ -17,6 +17,9 @@ then
   BIN="/home/biodocker/bin";
 fi
 
+if [ ! -e "$DB" ]
+then
+
 nodejs $BIN/desra_extractColumns.js $gff_file
 
 if [ -e ${dir} ]

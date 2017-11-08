@@ -1,5 +1,5 @@
-#!/bin/sh
-# main.sh  # main script 
+#!/usr/bin/env bash
+# main.sh  # main script
 #	   # get input: jobid
 #	   # run receives jobid as parameter
 # usage:
@@ -13,7 +13,7 @@
 #  locates jobid, job files: gene_name, sracond1, sracond2, gene database
 #  runs desra_go_mb.sh:
 #   desra_go_mb.sh -d gene_database -s comma_separated_sra_list -w working_dir -o sam_file
-# 
+#
 # technical notes:
 # create table:
 # sqlite> create table jobs(id varchar(100), start varchar(100), stop varchar(100), email_address, status varchar(100) );
@@ -97,7 +97,7 @@ then
         echo "sra_list1 is [$sra_list1]"
 	sra_list2=`cat sra_cond2 | tr "\\n" "," | sed -e 's/,$/\n/'`
         echo "sra_list2 is [$sra_list2]"
-        
+
         for gene in `cat gene_name`;
         do
 	  echo ""
@@ -110,19 +110,19 @@ then
 	  then
 	  echo "gene_dir is [$gene_dir]"
   	  cd $gene_dir
-  
+
   	  # get gene_db files from gene_directory
    	  for gene_db in `ls *.nhr | sed 's/.nhr//'`;
   	  do
   	    path_gene_db="$gene_dir/$gene_db"
    	    # echo "path_gene_db is [$path_gene_db]"
    	    # echo "gene_db is [$gene_db]"
-  
+
   	    # run desra_go_mb.sh for the gene database using sra accession lists
   	    echo "running cmd: $BIN/desra_go_mb.sh -d $path_gene_db -s $sra_list1 -w $jobid -o $dir/${gene_db}_cond1.bam"
             return_code=`$BIN/desra_go_mb.sh -d $path_gene_db -s $sra_list1 -w $jobid -o $dir`
             echo "return_code of cmd: [$return_code]"
-  
+
   	    echo "running cmd: $BIN/desra_go_mb.sh -d $path_gene_db -s $sra_list2 -w $jobid -o $dir/${gene_db}_cond2.bam"
             return_code=`$BIN/desra_go_mb.sh -d $path_gene_db -s $sra_list1 -w $jobid -o $dir`
             echo "return_code of cmd: [$return_code]"
