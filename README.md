@@ -16,12 +16,12 @@ deSRA facilitates the interrogation of SRA datasets for differential gene expres
 
 ### You can make a free DOI with zenodo <link>
 
-## Website (if applicable)
+## Website
 ![alt text](https://user-images.githubusercontent.com/12971527/32507410-558dd864-c3b5-11e7-9ac7-a038164de797.png "Input page")
 ![alt text](https://user-images.githubusercontent.com/12971527/32507427-6280a0ba-c3b5-11e7-8ecb-d24365631596.png "Output page")
 ![alt text](https://user-images.githubusercontent.com/12971527/32507439-6a004156-c3b5-11e7-8298-ced875e54c36.png "alternative graph")
 
-## Intro statement
+## Intro
 The differential expression of genes in reaction to an experimental condition can give valuable information on the pathways involved in the reaction. Unfortunately, it currently takes many steps to compare gene expression levels between Next Generation Sequencing (NGS) data sets. This repository presents code for a simple tool to compare the expression of selected genes between sets of NGS runs, as well as a link to a user friendly web interface.
 
 ## What's the problem?
