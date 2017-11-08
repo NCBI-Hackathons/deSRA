@@ -32,7 +32,7 @@ fi
 
 # echo "formating magiblast command: magicblast -db $db -sra $srr_list"
 cd $wdir
-magicblast $threads -no_unaligned -db $db -sra $srr_list | samtools sort -o ${out} -
+magicblast $threads -sra_cache -no_unaligned -db $db -sra $srr_list | samtools sort -o ${out} -
 samtools flagstat ${out} > ${out%.bam}.stats
 samtools index ${out}
 
