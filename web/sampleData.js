@@ -34,7 +34,7 @@ let data = [
     'start':184878,
     'end':199860,
     'chr':'',
-    'TPM1':3.45,
+    'TPM1':4.86,
     'TPM2':3.21,
     'PValue':0.123,
     'BAM1':'LOC102723897_1_sorted.bam',

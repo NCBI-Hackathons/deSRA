@@ -58,7 +58,7 @@ function tagHouse(obj) {
 function plotA(data, opts) {
   opts = opts || {};
   let margin = opts.margin || 50;
-  let space = opts.space || 30; // space between axis and plot area
+  let space = opts.space || 20; // space between axis and plot area
   let title = opts.title || '';
   let xAxisTitle = opts.xAxisTitle || '';
   let yAxisTitle = opts.yAxisTitle || '';
@@ -66,8 +66,8 @@ function plotA(data, opts) {
   let dotSize = opts.dotSize || 8;
   let id = opts.id || 'svg-plot-generated';
 
-  let width = opts.width || 1100;
-  let height = opts.height || 900;
+  let width = opts.width || 700;
+  let height = opts.height || 500;
   let h = height - margin * 2;
   let w = width - margin * 2;
 
@@ -91,13 +91,17 @@ function plotA(data, opts) {
 
   let xAxis = `<line id="xAxis" x1="0" y1="${h + space}" x2="${w}" y2="${h + space}"></line>`;
   let yAxis = `<line id="yAxis" x1="${-space}" y1="0" x2="${-space}" y2="${h}"></line>`;
-  let ticks = '<g id="ticks" stroke-width="0.5" font-size="16" text-anchor="end" alignment-baseline="middle">';
+
+  yAxis += `<text id="yAxisTitle" x="${0}" y="${0}" text-anchor="middle" stroke-width="0.5"
+alignment-baseline="central" transform="translate(${-80} ${h/2}) rotate(270)">SRA Expression (units)</text>`;
+
+  let ticks = '<g id="ticks" stroke-width="0.5" font-size="16" text-anchor="end">';
 
   for (let i = 0; i < 6; i++) {
     let d = (domain[1] - domain[0]) / 5;
     let py = yScale(d * i);
     let pText = d * i;
-    ticks += `<text x="${-space - 10}" y="${py}">${pText}</text>`;
+    ticks += `<text x="${-space - 10}" y="${py}" alignment-baseline="hanging">${pText}</text>`;
   }
   ticks += `<text x="${0.25 * w}" y="${h + space + 20}">N</text>`;
   ticks += `<text x="${0.75 * w}" y="${h + space + 20}">T</text>`;
@@ -128,7 +132,7 @@ x2="${p2.x}" y2="${p2.y}" stroke-opacity="0"></line>`;
     content += `<g id="${data[i].gene_id}">` + line + dot1 + dot2 + '</g>';
   }
 
-  let info = `<g id="info-area" stroke-width="0.5" font-size="16px">`;
+  let info = `<g id="info-area" stroke-width="0.5" font-size="14px">`;
   info += `<text id="gene-name-info" x="${w + margin + 20}" y="${height / 2 + 20}"></text>`;
   info += `<text id="gene-id-info" x="${w + margin + 20}" y="${height / 2 + 50}"></text>`;
   info += `<text id="TPM1-info" x="${w + margin + 20}" y="${height / 2 + 80}"></text>`;
