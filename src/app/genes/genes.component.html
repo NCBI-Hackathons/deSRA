@@ -3,13 +3,42 @@
     <!--<form #form="ngForm" (ngSubmit)="addNewRow(form)" novalidate>-->
     <form #form="ngForm" (ngSubmit)="submitForm(form)" novalidate>
 
-            <label for="geneIds">Enter the gene ID's you are interested in:</label>
-            <input id="geneIds" type="text" required name="genes"/>
+        <div class="row">
+            <div class="usa-width-one-half">
+                <label for="geneIds">Enter the gene ID's you are interested in:</label>
+                <input id="geneIds" type="text" required name="genes" ngModel/>
 
+                <input type="file" (change)="fileChanged($event)" name="file" placeholder="Upload file" accept=".pdf,.doc,.docx,.txt" ngModel>
+            </div>
+
+            <div class="usa-width-one-half">
+                <h3>Differential expression for SRA data</h3><h4>An automated protocol to extract differences in gene expression from public NGS datasets.</h4>
+                <p>Please enter comma separated Gene names and SRA accessions for each condition. Also enter an email address to get a notification when your job is done, as this tool will take a while to run. deSRA uses human genome assembly GRCh38 and the most recent annotation release for gene sequences. Read our documentation at <a href="https://github.com/NCBI-Hackathons/deSRA">https://github.com/NCBI-Hackathons/deSRA</a>.</p>
+            </div>
+        </div>
+
+        <div class="accessions row">
             <label for="SRRAccession1">SRR Accessions condition 1:</label>
-            <input id="SRRAccession1" type="text" required name="srraccessionA"/>
+            <input id="SRRAccession1" type="text" required name="srraccessionA" ngModel/>
+            <input type="file" (change)="fileChanged($event)" name="file" placeholder="Upload file" accept=".pdf,.doc,.docx,.txt">
 
             <label for="SRRAccession2">SRR Accessions condition 2:</label>
-            <input id="SRRAccession2" type="text" required name="srraccessionB"/>
+            <input id="SRRAccession2" type="text" required name="srraccessionB" ngModel/>
+            <input type="file" (change)="fileChanged($event)" name="file" placeholder="Upload file" accept=".pdf,.doc,.docx,.txt">
+        </div>
+
+        <label>Assembly</label>
+        <div class="radio">
+            <label>
+                <input type="radio" name="assembly" value="GRCh37" checked ngModel>GRCh37
+            </label>
+            <label>
+                <input type="radio" name="assembly" value="GRCh38" ngModel>GRCh38
+            </label>
+         </div>
+
+
+
+        <button type="submit">Ok</button>
      </form>
 </div>

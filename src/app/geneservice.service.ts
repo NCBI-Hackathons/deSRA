@@ -24,13 +24,15 @@ export class GenesService implements OnInit {
     genesUrl = "http://trace.ncbi.nlm.nih.gov/Traces/sra/";
 
     // Inject http here
-    constructor(private http: Http){
+    constructor(private http: Http, private genesComponent:GenesComponent){
 
         this.pageTitle = 'Genes from SRA';
 
         this.genes = [];
 
-        this.http.get('http://www.google.com');
+        //console.log("Form values are: ");
+        //console.log(genesComponent.genesFormValues);
+
     }
 
 

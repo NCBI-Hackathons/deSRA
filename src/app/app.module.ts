@@ -14,12 +14,13 @@ import {GenesService} from "./geneservice.service";
 
 
 @NgModule({
-  imports: [ BrowserModule, HttpModule, FormsModule ],
+  imports: [ BrowserModule, HttpModule, FormsModule],
   declarations: [ AppComponent,
                   CoursesComponent,
                   CourseworkListComponent,
-                  GenesComponent],
-  providers: [GenesService],
+                  GenesComponent
+                 ],
+  providers: [GenesService, GenesComponent],
   bootstrap: [ AppComponent ]
 })
 export class AppModule {}

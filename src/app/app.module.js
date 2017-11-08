@@ -25,8 +25,9 @@ AppModule = __decorate([
         declarations: [app_component_1.AppComponent,
             courses_component_1.CoursesComponent,
             coursework_list_component_1.CourseworkListComponent,
-            genes_component_1.GenesComponent],
-        providers: [geneservice_service_1.GenesService],
+            genes_component_1.GenesComponent
+        ],
+        providers: [geneservice_service_1.GenesService, genes_component_1.GenesComponent],
         bootstrap: [app_component_1.AppComponent]
     })
 ], AppModule);

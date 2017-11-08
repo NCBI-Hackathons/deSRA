@@ -11,10 +11,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 // app.component must inject the service
 var geneservice_service_1 = require("./geneservice.service");
+var genes_component_1 = require("./genes/genes.component");
+// directive makes GenesComponent a child component.  Must be made one to use.
 var AppComponent = (function () {
     // Inject service in AppComponent
-    function AppComponent(genesService) {
+    function AppComponent(genesService, genesComponent) {
         this.genesService = genesService;
+        this.genesComponent = genesComponent;
         this.pageTitle = 'Genes at SRA';
         this.currency = 'USD';
         /*
@@ -26,7 +29,10 @@ var AppComponent = (function () {
     }
     AppComponent.prototype.getGenesOutput = function () {
         console.log("test");
+        console.log("Form values in getGenesOutput are and value of genesFormValuesstring: ");
+        console.log(this.genesComponent.genesFormValuesstring);
         console.log("genesurl: " + this.genesService.genesUrl);
+        // Pass in geneParams
         this.genesService.getGenes();
     };
     AppComponent.prototype.getPriceOutput = function () {
@@ -40,7 +46,7 @@ AppComponent = __decorate([
         selector: 'pm-app',
         templateUrl: 'app/app.component.html'
     }),
-    __metadata("design:paramtypes", [geneservice_service_1.GenesService])
+    __metadata("design:paramtypes", [geneservice_service_1.GenesService, genes_component_1.GenesComponent])
 ], AppComponent);
 exports.AppComponent = AppComponent;
 //# sourceMappingURL=app.component.js.map

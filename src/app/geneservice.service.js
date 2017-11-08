@@ -22,7 +22,8 @@ var GenesService = (function () {
         this.currentPriceUrl = 'http://api.coindesk.com/v1/bpi/currentprice.json';
         this.pageTitle = 'Genes from SRA';
         this.genes = [];
-        this.http.get('http://www.google.com');
+        //console.log("Form values are: ");
+        //console.log(genesComponent.genesFormValues);
     }
     GenesService.prototype.ngOnInit = function () {
         // set ids before adding new row
@@ -36,6 +37,13 @@ var GenesService = (function () {
     //}
     // without Observable
     GenesService.prototype.getGenes = function () {
+        //console.log("Form values in getGenes are: ");
+        //console.log(this.genesComponent.getFormValuesJSON);
+        if (typeof (Storage) !== "undefined") {
+            // Store
+            console.log("genesformvalues to pass in are: ");
+            console.log(localStorage.getItem("genesformvalues"));
+        }
         console.log("genesurl in getGenes is: " + this.genesUrl);
         //return this.http.get<GenesComponent[]>(this.genesUrl, {params: {'sp': 'runinfo', 'acc': 'SRR5970434'}}).toPromise();
         return this.http.post(this.genesUrl, { params: { 'sp': 'runinfo', 'acc': 'SRR5970434' } }).toPromise();
