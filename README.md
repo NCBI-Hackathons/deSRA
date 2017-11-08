@@ -10,7 +10,7 @@ With ~3 million records currently stored in the SRA database, and submissions gr
  
 deSRA facilitates the interrogation of SRA datasets for differential gene expression via dockerized pipeline. deSRA makes it easy for biologists to examine the impact of their genes of interest on health and disease in the cloud through a user friendly web-interface. 
 
-![alt text](https://user-images.githubusercontent.com/12971527/32506375-62c19028-c3b2-11e7-9377-848b3e50016e.jpg "Overview Diagram")
+![alt text](https://user-images.githubusercontent.com/12971527/32574712-ff0dbfb8-c49f-11e7-8404-1e209a51c5c0.png "Overview Diagram")
 
 ## Website
 ![alt text](https://user-images.githubusercontent.com/12971527/32568276-c0a25ab8-c48b-11e7-8143-08cebecc6b1c.png "Input page")
