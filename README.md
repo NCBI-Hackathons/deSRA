@@ -1,7 +1,7 @@
 # deSRA
 differential expression of SRA: An automated protocol to extract differencess in gene expression from public NGS datasets.
 
-## Bakckground
+## Background
 The future of biomedical research depends on the ability to rapidly access and analyze Next-Generation Sequencing (NGS) data stored at the NCBI’s Sequence Read Archive (SRA). NGS provides an unprecedented level of resolution, allowing researchers to ask previously unanswerable questions such as how cancer pathogenesis might be mediated by very small changes in gene expression.
  
 Hosting data and performing analyses on the cloud, in a massively parallel fashion, will greatly accelerate the development of new research breakthroughs and innovative pharmaco-therapeutic strategies. Cloud computing would allow researchers to ask computationally intensive questions, such as how liver cells respond to treatment for hepatitis C virus infection (PMID28360091) or how human and mouse gene expression varies across all published datasets (DOI10.1101/189092)
@@ -11,10 +11,6 @@ With ~3 million records currently stored in the SRA database, and submissions gr
 deSRA facilitates the interrogation of SRA datasets for differential gene expression via dockerized pipeline. deSRA makes it easy for biologists to examine the impact of their genes of interest on health and disease in the cloud through a user friendly web-interface. 
 
 ![alt text](https://user-images.githubusercontent.com/12971527/32506375-62c19028-c3b2-11e7-9377-848b3e50016e.jpg "Overview Diagram")
-
-## Link to DOI
-
-### You can make a free DOI with zenodo <link>
 
 ## Website
 ![alt text](https://user-images.githubusercontent.com/12971527/32568276-c0a25ab8-c48b-11e7-8143-08cebecc6b1c.png "Input page")
