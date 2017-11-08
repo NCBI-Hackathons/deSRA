@@ -70,7 +70,7 @@ How to use the command line utility:
 
 ### Installing deSRA from Github
 
-1. `git clone https://github.com/NCBI-Hackathons/deSRA`
+`git clone https://github.com/NCBI-Hackathons/deSRA`
 
 # Future Development Plans
 
