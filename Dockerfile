@@ -89,4 +89,6 @@ ENV DB=/data/db.sqlite3
 ENV WORKDIR=/data
 WORKDIR /data/
 
-CMD [""]
+EXPOSE 8000
+
+ENTRYPOINT ["/home/biodocker/bin/docker_entry.sh"]
