@@ -28,7 +28,7 @@ Often people interested in gene expression lack the technical skills to make use
 
 ## Why should we solve it?
 
-The amount of NGS data stored in the Sequence Read Archive (SRA) data-base is growing rapidly. However, many researchers who are interested in this data do not have experience with the tools necessary to analyze it effectively. deSRA increases the utility and ROI of NGS progects by making the data more accessible to a wider range of individuals.
+The amount of NGS data stored in the Sequence Read Archive (SRA) data-base is growing rapidly. However, many researchers who are interested in this data do not have experience with the tools necessary to analyze it effectively. deSRA increases the utility and return on investment of NGS projects by making the data more accessible to a wider range of individuals.
 
 # What is deSRA?
 
