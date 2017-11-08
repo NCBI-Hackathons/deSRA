@@ -62,12 +62,16 @@ Launch a website from Docker image!
 
 ## Installing deSRA from Github
 `git clone https://github.com/NCBI-Hackathons/deSRA`
+
 `docker build -t biocontainers/desra deSRA`
 
 ## Preparing the database
 Creates a working directory `data`
+
 `wget ftp://ftp.ncbi.nlm.nih.gov/genomes/Homo_sapiens/GFF/ref_GRCh38.p7_top_level.gff3.gz`
+
 `gunzip ref_GRCh38.p7_top_level.gff3.gz`
+
 `docker run -it -v data:/data biocontainers/desra desra_pre-process.sh /data/ref_GRCh38.p7_top_level.gff3`
 
 ## Running the docker image
