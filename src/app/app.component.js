@@ -18,7 +18,7 @@ var AppComponent = (function () {
     function AppComponent(genesService, genesComponent) {
         this.genesService = genesService;
         this.genesComponent = genesComponent;
-        this.pageTitle = 'Genes at SRA';
+        this.pageTitle = 'deSRA';
         this.currency = 'USD';
         /*
         genesService.getPrice(this.currency).

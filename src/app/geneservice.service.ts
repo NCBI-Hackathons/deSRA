@@ -19,12 +19,13 @@ export class GenesService implements OnInit {
     // can only use *ngIf and *ngFor on Arrays
 
     public genes: any[] = [];
+    private genesComponent: GenesComponent;
 
     pageTitle: string;
     genesUrl = "http://trace.ncbi.nlm.nih.gov/Traces/sra/";
 
     // Inject http here
-    constructor(private http: Http, private genesComponent:GenesComponent){
+    constructor(private http: Http){
 
         this.pageTitle = 'Genes from SRA';
 
@@ -52,6 +53,15 @@ export class GenesService implements OnInit {
 
     // without Observable
     getGenes(): Promise<any> {
+
+
+        //console.log("Form values in getGenes are: ");
+        //console.log(this.genesComponent.getFormValuesJSON);
+        if (typeof(Storage) !== "undefined") {
+            // Store
+            console.log("genesformvalues to pass in are: ")
+            console.log(localStorage.getItem("genesformvalues"));
+        }
 
         console.log("genesurl in getGenes is: " + this.genesUrl);
 

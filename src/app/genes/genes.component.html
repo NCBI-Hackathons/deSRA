@@ -1,12 +1,13 @@
-<div>
+<div class="usa-section usa-grid">
     <!-- Here 'form' is an instance of ngForm directive -->
     <!--<form #form="ngForm" (ngSubmit)="addNewRow(form)" novalidate>-->
     <form #form="ngForm" (ngSubmit)="submitForm(form)" novalidate>
 
         <div class="row">
             <div class="usa-width-one-half">
+                <h1>deSRA <span>/ˈdezəˌrā/</span></h1>
                 <label for="geneIds">Enter the gene ID's you are interested in:</label>
-                <input id="geneIds" type="text" required name="genes" ngModel/>
+                <textarea id="geneIds"  required name="genes" ngModel></textarea>
 
                 <input type="file" (change)="fileChanged($event)" name="file" placeholder="Upload file" accept=".pdf,.doc,.docx,.txt" ngModel>
             </div>
@@ -18,25 +19,27 @@
         </div>
 
         <div class="accessions row">
-            <label for="SRRAccession1">SRR Accessions condition 1:</label>
-            <input id="SRRAccession1" type="text" required name="srraccessionA" ngModel/>
-            <input type="file" (change)="fileChanged($event)" name="file" placeholder="Upload file" accept=".pdf,.doc,.docx,.txt">
-
-            <label for="SRRAccession2">SRR Accessions condition 2:</label>
-            <input id="SRRAccession2" type="text" required name="srraccessionB" ngModel/>
-            <input type="file" (change)="fileChanged($event)" name="file" placeholder="Upload file" accept=".pdf,.doc,.docx,.txt">
+            <div class="usa-width-one-half">
+                <label for="SRRAccession1">SRR Accessions condition 1:</label>
+                <textarea id="SRRAccession1" type="text" required name="srraccessionA" ngModel></textarea>
+                <input type="file" (change)="fileChanged($event)" name="file" placeholder="Upload file" accept=".pdf,.doc,.docx,.txt">
+            </div>
+            <div class="usa-width-one-half">
+                <label for="SRRAccession2">SRR Accessions condition 2:</label>
+                <textarea id="SRRAccession2" type="text" required name="srraccessionB" ngModel></textarea>
+                <input type="file" (change)="fileChanged($event)" name="file" placeholder="Upload file" accept=".pdf,.doc,.docx,.txt">
+            </div>
         </div>
 
-        <label>Assembly</label>
-        <div class="radio">
-            <label>
-                <input type="radio" name="assembly" value="GRCh37" checked ngModel>GRCh37
-            </label>
-            <label>
-                <input type="radio" name="assembly" value="GRCh38" ngModel>GRCh38
-            </label>
-         </div>
-
+        <div class="row">
+        <div class="usa-width-one-half">
+          <p>This request will take a long time to process. Once the results are ready, we will send you a link to your email.</p>
+        </div>
+        <div class="usa-width-one-half">
+           <label for="email">Email</label>
+           <input id="email" name="email" type="text">
+        </div>
+      </div>
 
 
         <button type="submit">Ok</button>
