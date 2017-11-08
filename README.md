@@ -89,6 +89,7 @@ The front end needs to make a call to get the job IDs. Currently the files are p
 Accept gene IDs in addition to gene names
 Support organism other than human
 
-
+# Simulated output
 ![alt text](https://user-images.githubusercontent.com/12971527/32507427-6280a0ba-c3b5-11e7-8ecb-d24365631596.png "Output page")
-![alt text](https://user-images.githubusercontent.com/12971527/32507439-6a004156-c3b5-11e7-8298-ced875e54c36.png "alternative graph")
+# Actual output
+![alt text](https://user-images.githubusercontent.com/12971527/32576997-9262f214-c4a6-11e7-964d-e4c4d48a631b.png "alternative graph")
