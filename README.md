@@ -103,7 +103,7 @@ There is also a Docker image for hosting the main website. This should only be u
   3. `docker build --rm -t <this software>/website .`
   4. `docker run -t -i <this software>/website`
 
-# Future Development PLans
+# Future Development Plans
 
   1. Accept HUGO gene names in addition to gene IDs
   2. Support organisms other than human
