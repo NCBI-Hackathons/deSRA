@@ -12,42 +12,55 @@
 #  checks that jobid exists in jobs table of deSRA database
 #  locates jobid, job files: gene_name, sracond1, sracond2, gene database
 #  runs desra_go_mb.sh:
-#   desra_go_mb.sh -d gene_database -s comma_separated_sra_list -w working_dir -o sam_file
+#   desra_go_mb.sh -j jobid -e email_address -d blastdb_dir
 #
 # technical notes:
 # create table:
 # sqlite> create table jobs(id varchar(100), start varchar(100), stop varchar(100), email_address, status varchar(100) );
 
-while getopts a:d:j:e: o           # opts followed by ":" will have an argument
+while getopts d:j:e:t: o           # opts followed by ":" will have an argument
 do      case "$o" in
-        a)      assembly="$OPTARG";;
-        d)      database_dir="$OPTARG";;
-        j)      in_jobid="$OPTARG";;
+        d)      blastdb="$OPTARG";;
+        j)      job_id="$OPTARG";;
         e)      email_address="$OPTARG";;
-        [?])    echo >&2 "Usage: $0 -a assembly -j jobid -e email_address -d deSRA_database_dir"
+				t)      threads="$OPTARG";;
+        [?])    echo >&2 "Usage: $0 -j jobid -e email_address -d blastdb_dir -t number_of_threads"
                 exit 1;;
         esac
 done
 
-if [ ! ${BIN} ]
+if [ -z ${DATA} ]
 then
-  BIN="/home/biodocker/data/bin";
+  DATA="/data"
 fi
 
-if [ ! ${DATA} ]
+if [ -z ${BIN} ]
 then
-  DATA="/home/biodocker/data";
+  BIN=`echo ~/bin`
 fi
 
-echo "assembly is [$assembly]"
-blastdb_dir="$DATA/results/blastdb"
-echo "blastdb_dir is [$blastdb_dir]"
-assembly_dir=`echo $blastdb_dir/$assembly`
-echo "assembly_dir is [$assembly_dir]"
-database_file="$database_dir/deSRA"
-echo "DB is [$DB]"
+if [ -z ${JOBS} ]
+then
+  JOBS="/data/jobs"
+fi
 
-line=$(sqlite3 $DB "select * from jobs WHERE jobid = '$in_jobid'")
+if [ -z ${DB} ]
+then
+  DB="/data/db.sqlite3"
+fi
+
+if [ ! -e ${JOBS}/$job_id
+then
+	mkdir -p $JOBS/$job_id
+fi
+
+threads=""
+if [ -z $t ]
+then
+	threads="-t $t"
+fi
+
+line=$(sqlite3 $DB "select * from jobs WHERE jobid = '$job_id'")
 # echo "db line is [$line]";
 # echo "select * from jobs;" | sqlite3 deSRA
 
@@ -80,17 +93,14 @@ else
 fi
 
 sra_list="";
-if [ "$in_jobid" -eq "$jobid" ]
+if [ "$job_id" -eq "$jobid" ]
 then
     echo "jobid [$jobid] is found in database"
 
 		# cd to jobid directory
-    dir=`echo "$DATA/jobs/$jobid"`
+    dir="$JOBS/$job_id"
 		echo "dir is [$dir]"
 		cd $dir
-
-		# get gene_name and sra_condition files:
-    ls -l gene_name sra_cond*
 
 		# get sra accession lists from sra condition files:
 		sra_list1=`cat sra_cond1 | tr "\\n" "," | sed -e 's/,$/\n/'`
@@ -104,27 +114,22 @@ then
       echo "gene is [$gene]"
 
 			# go to gene directory
-			gene_dir="$assembly_dir/$gene"
+			gene_dir="$blastdb/$gene"
 
 			if [ -e ${gene_dir} ]
 			then
 					echo "gene_dir is [$gene_dir]"
-  				cd $gene_dir
 
 		  	  # get gene_db files from gene_directory
-		   	  for gene_db in `ls *.nhr | sed 's/.nhr//'`;
+		   	  for gene_db in `ls $gene_dir/*.nhr | sed 's/.nhr//'`;
 				  	  do
-				  	    path_gene_db="$gene_dir/$gene_db"
-				   	    # echo "path_gene_db is [$path_gene_db]"
-				   	    # echo "gene_db is [$gene_db]"
-
 				  	    # run desra_go_mb.sh for the gene database using sra accession lists
-				  	    echo "running cmd: $BIN/desra_go_mb.sh -d $path_gene_db -s $sra_list1 -w $jobid -o $dir/${gene_db}_cond1.bam"
-		            return_code=`$BIN/desra_go_mb.sh -d $path_gene_db -s $sra_list1 -w $jobid -o $dir`
+				  	    echo "running cmd: desra_go_mb.sh -d $gene_db -s $sra_list1 -g ${gene} $threads"
+		            return_code=`desra_go_mb.sh -d $gene_db -s $sra_list1 -g ${gene} $threads`
 		            echo "return_code of cmd: [$return_code]"
 
-				  	    echo "running cmd: $BIN/desra_go_mb.sh -d $path_gene_db -s $sra_list2 -w $jobid -o $dir/${gene_db}_cond2.bam"
-		            return_code=`$BIN/desra_go_mb.sh -d $path_gene_db -s $sra_list1 -w $jobid -o $dir`
+				  	    echo "running cmd: desra_go_mb.sh -d $gene_db -s $sra_list2 -g ${gene} $threads"
+		            return_code=`desra_go_mb.sh -d $gene_db -s $sra_list2 -g ${gene} $threads`
 		            echo "return_code of cmd: [$return_code]"
 					    echo ""
 					    echo ""
@@ -136,14 +141,14 @@ then
 			    echo ""
 			fi
     done
+
+		echo "preparing to run: python3 $BIN/desra_calculate_tpm.py"
+		return_code=`python3 $BIN/desra_calculate_tpm.py`
+
+		$stop_date=`date` 2> /dev/null;
+		stop_seconds=`date -d "$stop_date" +%s`
+		echo "stop is [$stop_seconds]"
+
+		sqlite3 $DB "update jobs SET status='DONE', stop='$stop_seconds' WHERE jobid='$jobid'"
 fi
-
-echo "preparing to run: python3 $BIN/desra_calculate_tpm.py"
-return_code=`python3 $BIN/desra_calculate_tpm.py`
-
-$stop_date=`date` 2> /dev/null;
-stop_seconds=`date -d "$stop_date" +%s`
-echo "stop is [$stop_seconds]"
-
-sqlite3 $DB "update jobs SET status='DONE', stop='$stop_seconds' WHERE jobid='$jobid'"
 exit;
