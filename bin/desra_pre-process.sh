@@ -28,7 +28,7 @@ fi
 if [ ! -e "$DB" ]
 then
 	echo "Creating SQLiteDB"
-	echo "create table jobs(id varchar(100), start varchar(100), stop varchar(100), email_address, jobid varchar(100), status varchar(100) );" | sqlite3 $DB
+	echo "create table jobs(id integer NOT NULL PRIMARY KEY AUTOINCREMENT, start varchar(100), stop varchar(100), email_address, jobid varchar(100), status varchar(100) );" | sqlite3 $DB
 fi
 
 if [ ! -e ${dir} ]
