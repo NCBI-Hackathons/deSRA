@@ -34,11 +34,11 @@ for db in `ls $dir/$gene_name/*.nhr | sed 's/.nhr//'`
 do
 	echo "Aligning gene $gene_name in blast db $db to $srr_list"
 	name=`basename $db`
-  magicblast $threads -sra_cache -no_unaligned -db $db -sra $srr_list | samtools sort -o ${name}.bam -
+  magicblast $threads -sra_cache -no_unaligned -db $db -sra $srr_list | samtools sort -o ${name}.bam -  || { echo 'ERROR: Running magicblast' ; exit 1; }
   echo "Collecting stats from ${name}.bam"
-	samtools flagstat ${name}.bam > ${name}.stats
+	samtools flagstat ${name}.bam > ${name}.stats  || { echo 'ERROR: Collecting stats from ${name}.bam' ; exit 1; }
 	echo "Indexing ${name}.bam"
-  samtools index ${name}.bam
+  samtools index ${name}.bam || { echo 'ERROR: Indexing ${name}.bam' ; exit 1; }
 done
 
 echo "DONE"
