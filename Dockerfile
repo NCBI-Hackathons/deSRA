@@ -88,6 +88,9 @@ RUN cd $DST && \
 	rm -rf $DST/$FOLDER
 
 ENV DB=/data/db.sqlite3
+ENV BIN=/home/biodocker/bin
+ENV DATA=/data
+ENV JOBS=/data/jobs
 ENV WORKDIR=/data
 WORKDIR /data/
 

@@ -21,7 +21,7 @@ done
 threads=""
 if [ -z $t ]
 then
-	threads=`echo "-num_threads $t"`
+	threads="-num_threads $t"
 fi
 
 if [ ! -e "$dir/$gene_name" ]
