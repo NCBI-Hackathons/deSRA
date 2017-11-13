@@ -82,60 +82,60 @@ fi
 sra_list="";
 if [ "$in_jobid" -eq "$jobid" ]
 then
-        echo "jobid [$jobid] is found in database"
+    echo "jobid [$jobid] is found in database"
 
-	# cd to jobid directory
-        dir=`echo "$DATA/jobs/$jobid"`
-	echo "dir is [$dir]"
-	cd $dir
+		# cd to jobid directory
+    dir=`echo "$DATA/jobs/$jobid"`
+		echo "dir is [$dir]"
+		cd $dir
 
-	# get gene_name and sra_condition files:
-        ls -l gene_name sra_cond*
+		# get gene_name and sra_condition files:
+    ls -l gene_name sra_cond*
 
-	# get sra accession lists from sra condition files:
-	sra_list1=`cat sra_cond1 | tr "\\n" "," | sed -e 's/,$/\n/'`
-        echo "sra_list1 is [$sra_list1]"
-	sra_list2=`cat sra_cond2 | tr "\\n" "," | sed -e 's/,$/\n/'`
-        echo "sra_list2 is [$sra_list2]"
+		# get sra accession lists from sra condition files:
+		sra_list1=`cat sra_cond1 | tr "\\n" "," | sed -e 's/,$/\n/'`
+    echo "sra_list1 is [$sra_list1]"
+		sra_list2=`cat sra_cond2 | tr "\\n" "," | sed -e 's/,$/\n/'`
+    echo "sra_list2 is [$sra_list2]"
 
-        for gene in `cat gene_name`;
-        do
-	  echo ""
-          echo "gene is [$gene]"
+    for gene in `cat gene_name`;
+    do
+			echo ""
+      echo "gene is [$gene]"
 
-	  # go to gene directory
-	  gene_dir="$assembly_dir/$gene"
+			# go to gene directory
+			gene_dir="$assembly_dir/$gene"
 
-	  if [ -e ${gene_dir} ]
-	  then
-	  echo "gene_dir is [$gene_dir]"
-  	  cd $gene_dir
+			if [ -e ${gene_dir} ]
+			then
+					echo "gene_dir is [$gene_dir]"
+  				cd $gene_dir
 
-  	  # get gene_db files from gene_directory
-   	  for gene_db in `ls *.nhr | sed 's/.nhr//'`;
-  	  do
-  	    path_gene_db="$gene_dir/$gene_db"
-   	    # echo "path_gene_db is [$path_gene_db]"
-   	    # echo "gene_db is [$gene_db]"
+		  	  # get gene_db files from gene_directory
+		   	  for gene_db in `ls *.nhr | sed 's/.nhr//'`;
+				  	  do
+				  	    path_gene_db="$gene_dir/$gene_db"
+				   	    # echo "path_gene_db is [$path_gene_db]"
+				   	    # echo "gene_db is [$gene_db]"
 
-  	    # run desra_go_mb.sh for the gene database using sra accession lists
-  	    echo "running cmd: $BIN/desra_go_mb.sh -d $path_gene_db -s $sra_list1 -w $jobid -o $dir/${gene_db}_cond1.bam"
-            return_code=`$BIN/desra_go_mb.sh -d $path_gene_db -s $sra_list1 -w $jobid -o $dir`
-            echo "return_code of cmd: [$return_code]"
+				  	    # run desra_go_mb.sh for the gene database using sra accession lists
+				  	    echo "running cmd: $BIN/desra_go_mb.sh -d $path_gene_db -s $sra_list1 -w $jobid -o $dir/${gene_db}_cond1.bam"
+				            return_code=`$BIN/desra_go_mb.sh -d $path_gene_db -s $sra_list1 -w $jobid -o $dir`
+				            echo "return_code of cmd: [$return_code]"
 
-  	    echo "running cmd: $BIN/desra_go_mb.sh -d $path_gene_db -s $sra_list2 -w $jobid -o $dir/${gene_db}_cond2.bam"
-            return_code=`$BIN/desra_go_mb.sh -d $path_gene_db -s $sra_list1 -w $jobid -o $dir`
-            echo "return_code of cmd: [$return_code]"
-	    echo ""
-	    echo ""
-  	    done
-	  else
-  	    echo "ERROR: gene dir does NOT exist, continuing with next gene"
-	    echo ""
-	    echo ""
-	    echo ""
-	  fi
-        done
+				  	    echo "running cmd: $BIN/desra_go_mb.sh -d $path_gene_db -s $sra_list2 -w $jobid -o $dir/${gene_db}_cond2.bam"
+				            return_code=`$BIN/desra_go_mb.sh -d $path_gene_db -s $sra_list1 -w $jobid -o $dir`
+				            echo "return_code of cmd: [$return_code]"
+					    echo ""
+					    echo ""
+		  	  done
+			else
+	  	    echo "ERROR: gene dir does NOT exist, continuing with next gene"
+			    echo ""
+			    echo ""
+			    echo ""
+			fi
+    done
 fi
 
 echo "preparing to run: python3 $BIN/desra_calculate_tpm.py"

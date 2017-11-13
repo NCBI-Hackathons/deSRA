@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# go_mb.sh # magicblast wrapper
+# desra_go_mb.sh # magicblast wrapper
 #	   # get input: db and comma_separated_sra_list
 #	   # run magicblast using db and comma_separated_sra_list
 # usage:
@@ -9,20 +9,14 @@
 
 while getopts d:s:w:o:t: o           # opts followed by ":" will have an argument
 do      case "$o" in
-        d)      db="$OPTARG";;
+        d)      dir="$OPTARG";;
         s)      srr_list="$OPTARG";;
-        w)      wdir="$OPTARG";;
-        o)      out="$OPTARG";;
+        g)      gene_name="$OPTARG";;
 				t)      threads="$OPTARG";;
-        [?])    echo >&2 "Usage: $0 -d db -s comma_separated_sra_list -w workign_dir -o bam_out -t number_of_threads"
+        [?])    echo >&2 "Usage: $0 -d blastdb_dir -s comma_separated_sra_list -g gene_name -t number_of_threads"
                 exit 1;;
         esac
 done
-
-db=`echo $db`
-# echo "db is $db"
-srr_list=`echo $srr_list`
-# echo "srr_list is $srr_list"
 
 threads=""
 if [ ! -z $t ]
@@ -30,11 +24,22 @@ then
 	threads=`echo "-num_threads $t"`
 fi
 
-# echo "formating magiblast command: magicblast -db $db -sra $srr_list"
-cd $wdir
-magicblast $threads -sra_cache -no_unaligned -db $db -sra $srr_list | samtools sort -o ${out} -
-samtools flagstat ${out} > ${out%.bam}.stats
-samtools index ${out}
+if [ ! -e "$dir/$gene_name" ]
+then
+	echo "The gene $gene_name is not in the blastdb directory. Check dir: $dir"
+	exit -1
+fi
 
+for db in `ls $dir/$gene_name/*.nhr | sed 's/.nhr//'`
+do
+	echo "Aligning gene $gene_name in blast db $db to $srr_list"
+	name=`basename $db`
+  magicblast $threads -sra_cache -no_unaligned -db $db -sra $srr_list | samtools sort -o ${name}.bam -
+  echo "Collecting stats from ${name}.bam"
+	samtools flagstat ${name}.bam > ${name}.stats
+	echo "Indexing ${name}.bam"
+  samtools index ${name}.bam
+done
 
+echo "DONE"
 exit 0
