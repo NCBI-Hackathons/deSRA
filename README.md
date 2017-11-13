@@ -68,15 +68,15 @@ Launch a website from Docker image!
 ## Preparing the database
 Creates a working directory `data`
 
-`docker run -it -v data:/data biocontainers/desra desra_pre-process.sh -d /data/blastdb`
+`docker run -it -v \`pwd\`/data:/data biocontainers/desra desra_pre-process.sh -d /data/blastdb`
 
-### Creating database for with a selected number of genes
+### Creating database for a selected number of genes
 
 Create a file into the `data` directory with the list of genes to process (Gene name per line). Let's name the file `gene_name.txt`
 
 Create the database using:
 
-`docker run -it -v data:/data biocontainers/desra desra_pre-process.sh -d /data/blastdb -g /data/gene_name.txt`
+`docker run -it -v \`pwd\`/data:/data biocontainers/desra desra_pre-process.sh -d /data/blastdb -g /data/gene_name.txt`
 
 This command will create a folder `/data/blastdb/ref_GRCh38.p7_top_level`, inside that folder will be a folder per gene including the gene fasta sequence and the blast db.
 
@@ -97,7 +97,7 @@ A1CF_29974_50799409_50885681.nsq
 ## Processing data with the command line options
 To align a single gene with a number of SRA accessions. The gene blastdb should be create with the previous step.
 
-`docker run -it -v data:/data biocontainers/desra desra_go_mb.sh -d /data/blastdb/ref_GRCh38.p7_top_level -s comma_separated_sra_list -g A1CF -t number_of_threads`  
+`docker run -it -v \`pwd\`/data:/data biocontainers/desra desra_go_mb.sh -d /data/blastdb/ref_GRCh38.p7_top_level -s comma_separated_sra_list -g A1CF -t number_of_threads`  
 
 This command will create two files:
 
@@ -109,7 +109,7 @@ A1CF_29974_50799409_50885681.bam.bai
 ## Running the docker image for the website
 Execute this command for the website app. It will be available in the host port 8000
 
-`docker run -d -p 8000:8000 -v /home/ubuntu/data:/data biocontainers/desra /home/biodocker/bin/docker_entry.sh`
+`docker run -d -p 8000:8000 -v \`pwd\`/data:/data biocontainers/desra /home/biodocker/bin/docker_entry.sh`
 
 The blastdb database needs to be created before start the website app.
 

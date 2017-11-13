@@ -2,7 +2,7 @@
 # pre-process.sh   # Download fasta files for genes and created blastdb
 #
 #
-
+gff_file=""
 while getopts d:g:f: o           # opts followed by ":" will have an argument
 do      case "$o" in
         d)      dir="$OPTARG";;
@@ -18,6 +18,13 @@ then
   BIN="/home/biodocker/bin";
 fi
 
+if [ ! -e "/data/ncbi" ]
+then
+  mkdir /data/ncbi  || { echo 'ERROR: Creating dir /data/ncbi' ; exit 1; }
+	rm -rf /home/biodocker/.ncbi || { echo 'ERROR: Error removing dir /home/biodocker/.ncbi' ; exit 1; }
+	ln -s /data/ncbi /home/biodocker/.ncbi || { echo 'ERROR: Linking /data/ncbi to /home/biodocker/.ncbi' ; exit 1; }
+fi
+
 if [ ! -e "$DB" ]
 then
 	echo "Creating SQLiteDB"
@@ -26,48 +33,48 @@ fi
 
 if [ ! -e ${dir} ]
 then
-	mkdir -p ${dir}
+	mkdir -p ${dir} || { echo 'ERROR: Creating dir ${dir}' ; exit 1; }
 fi
 cd ${dir}
 
-if [ ! -e $gff_file ]
+if [ -z $gff_file ]
 then
-	gff_file="ref_GRCh38.p7_top_level.gff3.gz"
-	if [ ! -e "${gff_file%.gff}/$gff_file" ]
+	gff_file="ref_GRCh38.p7_top_level.gff3"
+	if [ ! -e "${gff_file%.gff3}/$gff_file" ]
 	then
-		echo "Creating directory ${gff_file%.gff} for the database "
-		mkdir -p ${gff_file%.gff}
-		cd ${gff_file%.gff}
+		echo "Creating directory ${gff_file%.gff3} for the database "
+		mkdir -p ${gff_file%.gff3} || { echo 'ERROR: Creating dir ${gff_file%.gff3}' ; exit 1; }
+		cd ${gff_file%.gff3} || { echo 'ERROR: Changing to dir ${gff_file%.gff3}' ; exit 1; }
 		echo "Downloading GFF file from NCBI"
-		wget ftp://ftp.ncbi.nlm.nih.gov/genomes/Homo_sapiens/GFF/ref_GRCh38.p7_top_level.gff3.gz
-		gunzip $gff_file
+		wget ftp://ftp.ncbi.nlm.nih.gov/genomes/Homo_sapiens/GFF/ref_GRCh38.p7_top_level.gff3.gz || { echo 'ERROR: Downloading file ftp://ftp.ncbi.nlm.nih.gov/genomes/Homo_sapiens/GFF/ref_GRCh38.p7_top_level.gff3.gz' ; exit 1; }
+		gunzip ${gff_file}.gz || { echo 'ERROR: Gunzipping ${gff_file}.gz' ; exit 1; }
 		cd ..
 	fi
 else
-	if [ ! -e "${gff_file%.gff}" ]
+	if [ ! -e "${gff_file%.gff3}" ]
 	then
-		echo "Creating directory ${gff_file%.gff} for the database "
-		mkdir ${gff_file%.gff}
+		echo "Creating directory ${gff_file%.gff3} for the database "
+		mkdir ${gff_file%.gff3} || { echo 'ERROR: Changing to dir ${gff_file%.gff3}' ; exit 1; }
 	fi
-	echo "Coping data to directory ${gff_file%.gff}"
-	cp $gff_file ${gff_file%.gff}/
-	rm -f ${gff_file%.gff}/${gff_file}.tsv
+	echo "Coping data to directory ${gff_file%.gff3}"
+	cp $gff_file ${gff_file%.gff3}/ || { echo 'ERROR: Coping $gff_file to dir ${gff_file%.gff3}' ; exit 1; }
+	rm -f ${gff_file%.gff3}/${gff_file}.tsv || { echo 'ERROR: Removing old ${gff_file%.gff3}/${gff_file}.tsv' ; exit 1; }
 fi
 
-if [ ! -e "${gff_file%.gff}/${gff_file}.tsv" ]
+if [ ! -e "${gff_file%.gff3}/${gff_file}.tsv" ]
 then
-	cd ${gff_file%.gff}
+	cd ${gff_file%.gff3} || { echo 'ERROR: Changing to dir ${gff_file%.gff3}' ; exit 1; }
 	echo "Extracting genes coordinates from GFF file"
-	nodejs $BIN/desra_extractColumns.js $gff_file
+	nodejs $BIN/desra_extractColumns.js $gff_file || { echo 'ERROR: Parsing GFF file' ; exit 1; }
 	cd ..
 fi
 
-cd ${gff_file%.gff}
+cd ${gff_file%.gff3} || { echo 'ERROR: Changing to dir ${gff_file%.gff3}' ; exit 1; }
 
 if [ -e "$gene_file" ]
 then
 	echo "Extracting selected genes"
-	grep grep -F -f $gene_file ${gff_file}.tsv > ${gff_file}_toparse.tsv
+	grep -F -f $gene_file ${gff_file}.tsv > ${gff_file}_toparse.tsv || { echo 'ERROR: Selecting genes from $gene_file' ; exit 1; }
 	tsv_file="${gff_file}_toparse.tsv"
 else
 	tsv_file="${gff_file}.tsv"
@@ -88,8 +95,8 @@ do
   mkdir -p ${GENE_name}
 	cd ${GENE_name}
   echo "Processing GENE $GENE_name"
-  efetch -db nuccore -id $ACC -format fasta -seq_start $START -seq_stop $STOP > ${GENE_name}_${GID}_${START}_${STOP}.fasta
-  makeblastdb -in ${GENE_name}_${GID}_${START}_${STOP}.fasta -out ${GENE_name}_${GID}_${START}_${STOP} -title ${GENE_name}_${GID}_${START}_${STOP} -parse_seqids -dbtype nucl
+  efetch -db nuccore -id $ACC -format fasta -seq_start $START -seq_stop $STOP > ${GENE_name}_${GID}_${START}_${STOP}.fasta || { echo 'ERROR: Fetching data from NCBI' ; exit 1; }
+  makeblastdb -in ${GENE_name}_${GID}_${START}_${STOP}.fasta -out ${GENE_name}_${GID}_${START}_${STOP} -title ${GENE_name}_${GID}_${START}_${STOP} -parse_seqids -dbtype nucl || { echo 'ERROR: Creating blast db' ; exit 1; }
   cd ..
 done
 
