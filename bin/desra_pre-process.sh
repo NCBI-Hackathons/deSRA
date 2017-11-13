@@ -51,14 +51,16 @@ then
 		cd ..
 	fi
 else
+	name=`basename $gff_file`
 	if [ ! -e "${gff_file%.gff3}" ]
 	then
-		echo "Creating directory ${gff_file%.gff3} for the database "
-		mkdir ${gff_file%.gff3} || { echo 'ERROR: Changing to dir ${gff_file%.gff3}' ; exit 1; }
+		echo "Creating directory ${name%.gff3} for the database "
+		mkdir ${name%.gff3} || { echo 'ERROR: Changing to dir ${name%.gff3}' ; exit 1; }
 	fi
-	echo "Coping data to directory ${gff_file%.gff3}"
-	cp $gff_file ${gff_file%.gff3}/ || { echo 'ERROR: Coping $gff_file to dir ${gff_file%.gff3}' ; exit 1; }
-	rm -f ${gff_file%.gff3}/${gff_file}.tsv || { echo 'ERROR: Removing old ${gff_file%.gff3}/${gff_file}.tsv' ; exit 1; }
+	echo "Coping data to directory ${name%.gff3}"
+	cp $gff_file ${name%.gff3}/ || { echo 'ERROR: Coping $gff_file to dir ${gff_file%.gff3}' ; exit 1; }
+	rm -f ${name%.gff3}/${gff_file}.tsv || { echo 'ERROR: Removing old ${gff_file%.gff3}/${gff_file}.tsv' ; exit 1; }
+	gff_file=$name
 fi
 
 if [ ! -e "${gff_file%.gff3}/${gff_file}.tsv" ]
