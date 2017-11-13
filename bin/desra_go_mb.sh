@@ -18,10 +18,11 @@ do      case "$o" in
         esac
 done
 
-threads=""
-if [ ! -z $t ]
+if [ ! -z $threads ]
 then
-	threads="-num_threads $t"
+	threads="-num_threads $threads"
+else
+	threads=""
 fi
 
 if [ ! -e "$dir/$gene_name" ]
