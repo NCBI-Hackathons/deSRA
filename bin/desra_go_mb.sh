@@ -19,7 +19,7 @@ do      case "$o" in
 done
 
 threads=""
-if [ ! -z $t ]
+if [ -z $t ]
 then
 	threads=`echo "-num_threads $t"`
 fi
