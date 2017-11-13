@@ -54,10 +54,11 @@ then
 	mkdir -p $JOBS/$job_id
 fi
 
-threads="-t 1"
-if [ ! -z $t ]
+if [ ! -z $threads ]
 then
-	threads="-t $t"
+	threads="-t $threads"
+else
+	threads=""
 fi
 
 line=$(echo "select * from jobs WHERE jobid = '$job_id';" | sqlite3 $DB)
@@ -119,23 +120,20 @@ then
 			echo ""
       echo "gene is [$gene]"
 
-			# go to gene directory
-			gene_dir="$blastdb/$gene"
-
-			if [ -e ${gene_dir} ]
+			if [ -e ${blastdb}/$gene ]
 			then
-					echo "gene_dir is [$gene_dir]"
+					echo "gene dir is [$blastdb/$gene]"
 
 		  	  # get gene_db files from gene_directory
-		   	  for gene_db in `ls $gene_dir/*.nhr | sed 's/.nhr//'`;
+		   	  for gene_db in `ls $blastdb/$gene/*.nhr | sed 's/.nhr//'`;
 				  	  do
 				  	    # run desra_go_mb.sh for the gene database using sra accession lists
-				  	    echo "running cmd: desra_go_mb.sh -d $gene_db -s $sra_list1 -g ${gene} $threads"
-		            return_code=`desra_go_mb.sh -d $gene_db -s $sra_list1 -g ${gene} $threads`
+				  	    echo "running cmd: desra_go_mb.sh -d $blastdb -s $sra_list1 -g ${gene} $threads"
+		            return_code=`desra_go_mb.sh -d $blastdb -s $sra_list1 -g ${gene} $threads`
 		            echo "return_code of cmd: [$return_code]"
 
-				  	    echo "running cmd: desra_go_mb.sh -d $gene_db -s $sra_list2 -g ${gene} $threads"
-		            return_code=`desra_go_mb.sh -d $gene_db -s $sra_list2 -g ${gene} $threads`
+				  	    echo "running cmd: desra_go_mb.sh -d $blastdb -s $sra_list2 -g ${gene} $threads"
+		            return_code=`desra_go_mb.sh -d $blastdb -s $sra_list2 -g ${gene} $threads`
 		            echo "return_code of cmd: [$return_code]"
 					    echo ""
 					    echo ""
