@@ -68,7 +68,9 @@ Launch a website from Docker image!
 ## Preparing the database
 Creates a working directory `data`
 
-`docker run -it -v \`pwd\`/data:/data biocontainers/desra desra_pre-process.sh -d /data/blastdb`
+```
+docker run -it -v `pwd`/data:/data biocontainers/desra desra_pre-process.sh -d /data/blastdb
+```
 
 ### Creating database for a selected number of genes
 
