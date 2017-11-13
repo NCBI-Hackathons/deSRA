@@ -81,6 +81,8 @@ ENV DST=/tmp
 RUN cd $DST && \
 	git clone $URL && \
 	mv $DST/$FOLDER/bin/* /home/biodocker/bin/ && \
+	mkdir /home/biodocker/.ncbi && \
+	mv $DST/$FOLDER/config/user-settings.mkfg /home/biodocker/.ncbi/ && \
 	mkdir /home/biodocker/web/ && \
 	mv $DST/$FOLDER/web/* /home/biodocker/web/ && \
 	rm -rf $DST/$FOLDER

@@ -7,7 +7,7 @@
 # go_mb.sh -d database -s comma_separated_sra_list -w workign_dir -o bam_file -t number_of_threads
 #
 
-while getopts d:s:w:o:t: o           # opts followed by ":" will have an argument
+while getopts d:s:t:g: o           # opts followed by ":" will have an argument
 do      case "$o" in
         d)      dir="$OPTARG";;
         s)      srr_list="$OPTARG";;
