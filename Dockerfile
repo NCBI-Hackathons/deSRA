@@ -90,5 +90,3 @@ ENV WORKDIR=/data
 WORKDIR /data/
 
 EXPOSE 8000
-
-ENTRYPOINT ["/home/biodocker/bin/docker_entry.sh"]

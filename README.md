@@ -68,11 +68,7 @@ Launch a website from Docker image!
 ## Preparing the database
 Creates a working directory `data`
 
-`wget ftp://ftp.ncbi.nlm.nih.gov/genomes/Homo_sapiens/GFF/ref_GRCh38.p7_top_level.gff3.gz`
-
-`gunzip ref_GRCh38.p7_top_level.gff3.gz`
-
-`docker run -it -v data:/data biocontainers/desra desra_pre-process.sh -d /data/blastdb -f /data/ref_GRCh38.p7_top_level.gff3`
+`docker run -it -v data:/data biocontainers/desra desra_pre-process.sh -d /data/blastdb`
 
 ### Creating database for with a selected number of genes
 
@@ -80,7 +76,7 @@ Create a file into the `data` directory with the list of genes to process (Gene 
 
 Create the database using:
 
-`docker run -it -v data:/data biocontainers/desra desra_pre-process.sh -d /data/blastdb -f /data/ref_GRCh38.p7_top_level.gff3 -g /data/gene_name.txt`
+`docker run -it -v data:/data biocontainers/desra desra_pre-process.sh -d /data/blastdb -g /data/gene_name.txt`
 
 This command will create a folder `/data/blastdb/ref_GRCh38.p7_top_level`, inside that folder will be a folder per gene including the gene fasta sequence and the blast db.
 
@@ -113,9 +109,9 @@ A1CF_29974_50799409_50885681.bam.bai
 ## Running the docker image for the website
 Execute this command for the website app. It will be available in the host port 8000
 
-`docker run -d -p 8000:8000 -v /home/ubuntu/data:/data biocontainers/desra`
+`docker run -d -p 8000:8000 -v /home/ubuntu/data:/data biocontainers/desra /home/biodocker/bin/docker_entry.sh`
 
-The blastdb database needs to be created before start the website app. 
+The blastdb database needs to be created before start the website app.
 
 # Future Development Plans
 The front end needs to make a call to get the job IDs. Currently the files are put in the /data folder, but they should go into the /jobid folder inside the /data folder. Write a service that creates the folder and returns the job ID, and start the bash script.

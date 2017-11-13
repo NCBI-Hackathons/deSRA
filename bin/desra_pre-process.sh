@@ -21,7 +21,7 @@ fi
 if [ ! -e "$DB" ]
 then
 	echo "Creating SQLiteDB"
-	echo "create table jobs(id varchar(100), start varchar(100), stop varchar(100), email_address, jobid varchar(100), status varchar(100) );" | sqlite3 db.sqlite3
+	echo "create table jobs(id varchar(100), start varchar(100), stop varchar(100), email_address, jobid varchar(100), status varchar(100) );" | sqlite3 $DB
 fi
 
 if [ ! -e ${dir} ]
@@ -32,31 +32,48 @@ cd ${dir}
 
 if [ ! -e $gff_file ]
 then
-	echo "Downloading GFF file from NCBI"
-	wget ftp://ftp.ncbi.nlm.nih.gov/genomes/Homo_sapiens/GFF/ref_GRCh38.p7_top_level.gff3.gz
 	gff_file="ref_GRCh38.p7_top_level.gff3.gz"
+	if [ ! -e "${gff_file%.gff}/$gff_file" ]
+	then
+		echo "Creating directory ${gff_file%.gff} for the database "
+		mkdir -p ${gff_file%.gff}
+		cd ${gff_file%.gff}
+		echo "Downloading GFF file from NCBI"
+		wget ftp://ftp.ncbi.nlm.nih.gov/genomes/Homo_sapiens/GFF/ref_GRCh38.p7_top_level.gff3.gz
+		gunzip $gff_file
+		cd ..
+	fi
+else
+	if [ ! -e "${gff_file%.gff}" ]
+	then
+		echo "Creating directory ${gff_file%.gff} for the database "
+		mkdir ${gff_file%.gff}
+	fi
+	echo "Coping data to directory ${gff_file%.gff}"
+	cp $gff_file ${gff_file%.gff}/
+	rm -f ${gff_file%.gff}/${gff_file}.tsv
 fi
 
-echo "Extracting genes coordinates from GFF file"
-nodejs $BIN/desra_extractColumns.js $gff_file
-
-if [ ! -e "${gff_file%.gff}" ]
+if [ ! -e "${gff_file%.gff}/${gff_file}.tsv" ]
 then
-	echo "Creating directory ${gff_file%.gff} for the database "
-	mkdir ${gff_file%.gff}
+	cd ${gff_file%.gff}
+	echo "Extracting genes coordinates from GFF file"
+	nodejs $BIN/desra_extractColumns.js $gff_file
+	cd ..
 fi
 
-echo "Moving data to directory ${gff_file%.gff}"
-mv $gff_file ${gff_file%.gff}
 cd ${gff_file%.gff}
 
 if [ -e "$gene_file" ]
 then
 	echo "Extracting selected genes"
-	grep grep -F -f $gene_file ${gff_file}.tsv
+	grep grep -F -f $gene_file ${gff_file}.tsv > ${gff_file}_toparse.tsv
+	tsv_file="${gff_file}_toparse.tsv"
+else
+	tsv_file="${gff_file}.tsv"
 fi
 
-cat ${gff_file}.tsv | while read line;
+cat ${tsv_file} | while read line;
 do
   # echo "$line";
   ACC=`echo $line | awk '{print $1}'`
