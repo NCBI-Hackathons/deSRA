@@ -49,37 +49,43 @@ then
   DB="/data/db.sqlite3"
 fi
 
-if [ ! -e ${JOBS}/$job_id
+if [ ! -e ${JOBS}/$job_id ]
 then
 	mkdir -p $JOBS/$job_id
 fi
 
-threads=""
-if [ -z $t ]
+threads="-t 1"
+if [ ! -z $t ]
 then
 	threads="-t $t"
 fi
 
-line=$(sqlite3 $DB "select * from jobs WHERE jobid = '$job_id'")
+line=$(echo "select * from jobs WHERE jobid = '$job_id';" | sqlite3 $DB)
 # echo "db line is [$line]";
 # echo "select * from jobs;" | sqlite3 deSRA
 
-if [ ${line} ]
+if [ -z "$line" ]
+then
+	echo "insert into jobs (start,email_address, jobid, status) values (CURRENT_TIMESTAMP, '${email_address}', '${job_id}','submitted');" | sqlite3 $DB
+  line=$(echo "select * from jobs WHERE jobid = '$job_id';" | sqlite3 $DB)
+fi
+
+if [ ! -z "${line}" ]
 then
   echo "db line is [$line]";
-  id=`echo $line | cut -d\| -f1`;
+  id=`echo "$line" | cut -d\| -f1`;
   echo "id is $id";
-  START=`echo $line | cut -d\| -f2`
+  START=`echo "$line" | cut -d\| -f2`
   echo "START is $START"
-  STOP=`echo $line | cut -d\| -f3`
+  STOP=`echo "$line" | cut -d\| -f3`
   echo "STOP is $STOP"
-  email_address=`echo $line | cut -d\| -f4`
-  jobid=`echo $line | cut -d\| -f5`
+  email_address=`echo "$line" | cut -d\| -f4`
+  jobid=`echo "$line" | cut -d\| -f5`
   echo "jobid is $jobid"
-  status=`echo $line | cut -d\| -f6`
+  status=`echo "$line" | cut -d\| -f6`
   done_status="DONE"
   echo "status is: $status"
-  if [ "$status"=="$done_status" ]
+  if [ "${status}" == "${done_status}" ]
   then
     echo "ERROR: status [$status] found for jobid [$jobid] in database, please address and resubmit."
     echo "exiting...."
@@ -142,13 +148,9 @@ then
 			fi
     done
 
-		echo "preparing to run: python3 $BIN/desra_calculate_tpm.py"
-		return_code=`python3 $BIN/desra_calculate_tpm.py`
+		echo "preparing to run: python3 $BIN/desra_calculate_tpm.py -o ${job_id}.txt"
+		return_code=`python3 $BIN/desra_calculate_tpm.py -o ${job_id}.txt`
 
-		$stop_date=`date` 2> /dev/null;
-		stop_seconds=`date -d "$stop_date" +%s`
-		echo "stop is [$stop_seconds]"
-
-		sqlite3 $DB "update jobs SET status='DONE', stop='$stop_seconds' WHERE jobid='$jobid'"
+		echo "update jobs SET status='DONE', stop=CURRENT_TIMESTAMP WHERE jobid='$jobid';" | sqlite3 $DB
 fi
 exit;

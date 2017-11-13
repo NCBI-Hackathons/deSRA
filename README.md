@@ -112,6 +112,22 @@ A1CF_29974_50799409_50885681.bam
 A1CF_29974_50799409_50885681.bam.bai
 ```
 
+## Processing a list of gene vs two lists of SRA accessions
+
+We've developed a main script `desra_main.sh` to process a list of genes vs two lists of SRA accessions (condition 1 and condition 2). This script is also designed to process the jobs submitted by the website. Therefore, it required special working folder.
+
+This kind of jobs should be executed in directory inside `data/jobs` creating a folder with an unique identifier that will be used as `job_id`. For example, create a folder `data/jobs/00001/`.
+
+Inside this directory creates three files named: `gene_name`, `sra_cond1` and `sra_cond2`. Each files should have an id per line.
+
+Run this command to process the data:
+
+```
+docker run -it -v `pwd`/data:/data biocontainers/desra desra_main.sh -d /data/blastdb/ref_GRCh38.p7_top_level -j 00001 -e r78v10a07@gmail.com -t 4
+```
+
+Please, note that `-t 4` will run magicblast with 4 threads. Adapt this command to your host resources.
+
 ## Running the docker image for the website
 Execute this command for the website app. It will be available in the host port 8000
 
