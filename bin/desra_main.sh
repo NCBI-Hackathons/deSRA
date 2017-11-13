@@ -45,9 +45,9 @@ echo "blastdb_dir is [$blastdb_dir]"
 assembly_dir=`echo $blastdb_dir/$assembly`
 echo "assembly_dir is [$assembly_dir]"
 database_file="$database_dir/deSRA"
-echo "database_file is [$database_file]"
+echo "DB is [$DB]"
 
-line=$(sqlite3 deSRA "select * from jobs WHERE jobid = '$in_jobid'")
+line=$(sqlite3 $DB "select * from jobs WHERE jobid = '$in_jobid'")
 # echo "db line is [$line]";
 # echo "select * from jobs;" | sqlite3 deSRA
 
@@ -120,12 +120,12 @@ then
 
 				  	    # run desra_go_mb.sh for the gene database using sra accession lists
 				  	    echo "running cmd: $BIN/desra_go_mb.sh -d $path_gene_db -s $sra_list1 -w $jobid -o $dir/${gene_db}_cond1.bam"
-				            return_code=`$BIN/desra_go_mb.sh -d $path_gene_db -s $sra_list1 -w $jobid -o $dir`
-				            echo "return_code of cmd: [$return_code]"
+		            return_code=`$BIN/desra_go_mb.sh -d $path_gene_db -s $sra_list1 -w $jobid -o $dir`
+		            echo "return_code of cmd: [$return_code]"
 
 				  	    echo "running cmd: $BIN/desra_go_mb.sh -d $path_gene_db -s $sra_list2 -w $jobid -o $dir/${gene_db}_cond2.bam"
-				            return_code=`$BIN/desra_go_mb.sh -d $path_gene_db -s $sra_list1 -w $jobid -o $dir`
-				            echo "return_code of cmd: [$return_code]"
+		            return_code=`$BIN/desra_go_mb.sh -d $path_gene_db -s $sra_list1 -w $jobid -o $dir`
+		            echo "return_code of cmd: [$return_code]"
 					    echo ""
 					    echo ""
 		  	  done
@@ -145,5 +145,5 @@ $stop_date=`date` 2> /dev/null;
 stop_seconds=`date -d "$stop_date" +%s`
 echo "stop is [$stop_seconds]"
 
-sqlite3 $database_file "update jobs SET status='DONE', stop='$stop_seconds' WHERE jobid='$jobid'"
+sqlite3 $DB "update jobs SET status='DONE', stop='$stop_seconds' WHERE jobid='$jobid'"
 exit;
