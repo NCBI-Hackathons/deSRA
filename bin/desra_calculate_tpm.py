@@ -69,7 +69,7 @@ if __name__ == '__main__':
     else:
         scale = 10E6
 
-    bam_files = [name for root, dirs, files in os.walk('./') for name in files if name.endswith(".sam")]
+    bam_files = [name for root, dirs, files in os.walk('./') for name in files if name.endswith(".bam")]
 
     samples = {}
     genes = {}
@@ -88,7 +88,7 @@ if __name__ == '__main__':
         else:
             genes[mdata[0]][cond] = {}
             genes[mdata[0]][cond]['TPM_list'] = []
-        samfile = pysam.AlignmentFile(b, "r")
+        samfile = pysam.AlignmentFile(b, "rb")
         if cond not in samples:
             samples[cond] = []
         for read in samfile.fetch(until_eof=True):
