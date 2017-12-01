@@ -5,26 +5,6 @@
 
 const fs = require('fs');
 const readline = require('readline');
-//
-// function extracCols(path, delemeter, indexArr) {
-//   let ws = fs.createWriteStream(path+'.tsv');
-//   let rl = readline.createInterface({
-//     input: fs.createReadStream(path)
-//   });
-//   rl.on('line', line => {
-//     if (line[0] !== '#') {
-//       line = line.trim();
-//       let cols = line.split(delemeter);
-//       let c = new Array(indexArr.length + 1);
-//       for (let i = 0; i < indexArr.length; i++) {
-//         c[i] = cols[indexArr[i]];
-//       }
-//       ws.write(c.join('\t') + '\n');
-//     }
-//   }).on('close', () => {
-//     console.log('Done extracting!');
-//   });
-// }
 
 function extracCols(path, delemeter, indexArr) {
   let ws = fs.createWriteStream(path+'.tsv');
