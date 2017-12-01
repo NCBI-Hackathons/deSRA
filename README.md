@@ -14,7 +14,13 @@ deSRA facilitates the interrogation of SRA datasets for differential gene expres
 
 ## Website
 (Not fully functional yet i.e. does not accept submissions yet)
-https://ncbi-hackathons.github.io/deSRA/http/
+
+Demo for submission:
+- https://ncbi-hackathons.github.io/deSRA/web/app/public/index.html
+
+Demo for result visualization: 
+- https://ncbi-hackathons.github.io/deSRA/web/app/public/result.html
+- https://ncbi-hackathons.github.io/deSRA/web/app/public/result_demo_1.html
 
 ## Introduction
 The differential expression of genes in response to an experimental condition can give valuable information on the pathways involved in the reaction. Unfortunately, it currently takes many steps to compare gene expression levels between Next Generation Sequencing (NGS) data sets. This repository presents code for a simple tool to compare the expression of selected genes between sets of NGS runs, as well as a link to a user friendly web interface.
