@@ -1,5 +1,5 @@
 # deSRA
-**d**ifferential **e**xpression of SRA: An automated protocol to extract differences in gene expression from public NGS datasets.
+**d**ifferential **e**xpression of **SRA**: An automated protocol to extract differences in gene expression from public NGS datasets.
 
 ## Background
 The future of biomedical research depends on the ability to rapidly access and analyze Next-Generation Sequencing (NGS) data stored at the NCBI’s Sequence Read Archive (SRA). NGS provides an unprecedented level of resolution, allowing researchers to ask previously unanswerable questions such as how cancer pathogenesis might be mediated by very small changes in gene expression.
@@ -16,11 +16,11 @@ deSRA facilitates the interrogation of SRA datasets for differential gene expres
 (Not fully functional yet i.e. does not accept submissions yet)
 
 Demo for submission:
-- https://ncbi-hackathons.github.io/deSRA/web/app/public/index.html
+- https://ncbi-hackathons.github.io/deSRA/web/public/index.html
 
 Demo for result visualization: 
-- https://ncbi-hackathons.github.io/deSRA/web/app/public/result.html
-- https://ncbi-hackathons.github.io/deSRA/web/app/public/result_demo_1.html
+- https://ncbi-hackathons.github.io/deSRA/web/public/result.html
+- https://ncbi-hackathons.github.io/deSRA/web/public/result_demo_1.html
 
 ## Introduction
 The differential expression of genes in response to an experimental condition can give valuable information on the pathways involved in the reaction. Unfortunately, it currently takes many steps to compare gene expression levels between Next Generation Sequencing (NGS) data sets. This repository presents code for a simple tool to compare the expression of selected genes between sets of NGS runs, as well as a link to a user friendly web interface.
