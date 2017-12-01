@@ -11,7 +11,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var app = express();
-app.use('/', express.static('http'));
+app.use('/', express.static('public'));
 
 app.listen('8000', () => {
   console.log('Listening on port 8000');
