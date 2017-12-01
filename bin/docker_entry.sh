@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-cd /home/biodocker/web/app
+cd /home/biodocker/web
 
 nodejs index.js
