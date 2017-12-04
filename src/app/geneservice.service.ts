@@ -66,7 +66,8 @@ export class GenesService implements OnInit {
         console.log("genesurl in getGenes is: " + this.genesUrl);
 
         //return this.http.get<GenesComponent[]>(this.genesUrl, {params: {'sp': 'runinfo', 'acc': 'SRR5970434'}}).toPromise();
-        return this.http.post(this.genesUrl, {params: {'sp': 'runinfo', 'acc': 'SRR5970434'}}).toPromise();
+        //return this.http.post(this.genesUrl, {params: {'sp': 'runinfo', 'acc': 'SRR5970434'}}).toPromise();
+        return this.http.post(this.genesUrl, {params: localStorage.getItem("genesformvalues")}).toPromise();
     };
         //this.http.get(this.genesUrl, {params: {'sp': 'runinfo', 'acc': 'SRR5970434'}});
         //this.http.get(this.genesUrl);
