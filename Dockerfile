@@ -25,7 +25,7 @@ RUN apt-get update && \
 			lzma lzma-dev liblzma-dev \
 			libcurl4-gnutls-dev \
 			python3 python3-pip \
-			nodejs \
+			nodejs npm \
 			liblwp-protocol-https-perl && \
     apt-get clean && \
     apt-get purge && \
@@ -85,6 +85,8 @@ RUN cd $DST && \
 	mv $DST/$FOLDER/config/user-settings.mkfg /home/biodocker/.ncbi/ && \
 	mkdir /home/biodocker/web/ && \
 	mv $DST/$FOLDER/web/* /home/biodocker/web/ && \
+	cd /home/biodocker/web/ && \
+	npm install && \
 	rm -rf $DST/$FOLDER
 
 ENV DB=/data/db.sqlite3
