@@ -153,6 +153,7 @@ Support organisms other than human
 ### Actual plot!
 ![alt text](https://user-images.githubusercontent.com/12971527/32578554-aa211b1a-c4ab-11e7-9a56-782cf122c86d.png "alternative graph")
 
+
 Angular2 frontend
 1) Open a command prompt in the project's root directory
 
@@ -162,3 +163,5 @@ Angular2 frontend
 3) Type: `npm start`
     This launches the TypeScript compiler (tsc) to compile the application and wait for changes. 
     It also starts the lite-server and launches the browser to run the application.
+
+
