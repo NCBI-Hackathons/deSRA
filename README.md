@@ -152,3 +152,13 @@ Support organisms other than human
 ![alt text](https://user-images.githubusercontent.com/12971527/32578450-459fad3c-c4ab-11e7-8c9a-41fed0d965a8.png "Output page")
 ### Actual plot!
 ![alt text](https://user-images.githubusercontent.com/12971527/32578554-aa211b1a-c4ab-11e7-9a56-782cf122c86d.png "alternative graph")
+
+Angular2 frontend
+1) Open a command prompt in the project's root directory
+
+2) Type: `npm install`
+    This installs the dependencies as defined in the package.json file.
+    
+3) Type: `npm start`
+    This launches the TypeScript compiler (tsc) to compile the application and wait for changes. 
+    It also starts the lite-server and launches the browser to run the application.

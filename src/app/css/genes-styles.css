@@ -1,0 +1,46 @@
+.ncbi-header {
+  background-color: rgba(22, 74, 138, 0.95);
+  color:#fff;}
+.ncbi-header a {
+    color: #fff;
+    text-decoration: none; }
+.ncbi-header a:hover { 
+    color: #ffffff;
+    text-decoration: underline; }
+.ncbi-header .agencies ul {
+      padding: 0;
+      margin: 0;
+      list-style-type: none; }
+.ncbi-header .agencies .nih {
+      float: left;
+      margin: 0 1.2rem 1.5rem 0;
+      background: #005295 url("../img/nih-logo-white.svg") no-repeat center;
+      height: 3.4rem;
+      width: 5.6rem; }
+.ncbi-header .agencies .nlm {
+      color: #ffffff;
+      margin-top: 1.5rem;}
+.ncbi-header .agencies .ncbi {
+      display: table-cell;
+      vertical-align: middle;
+      font-size: 1.4rem;
+      line-height: 1.2;
+      color: #ffffff;
+      margin-top: 1.5rem;
+      padding: 0 1.2rem 0 0; }      
+
+.usa-section {padding-top:3.5rem;}
+h1 span {color:#999; margin-left:1rem; font-size:2.5rem;}
+textarea { height:7rem;}
+label {font-weight: bold;}    
+fieldset {margin-top:3rem;}
+fieldset legend {font-size:1.7rem;}
+fieldset li { display:inline-block; margin-left:1em;} 
+input[type="submit"] {width:12em;} 
+.row {margin:1em 0; display: block; overflow: hidden; }
+.accessions span { font-weight: normal; margin-left:0.5em; font-style: italic;}
+.seq-viewer { background-color: #f1efef; border:2px solid #ccc; padding:1em; font-size:1.5em; font-weight:bold;
+	text-align: center; color:#999;border-radius:3px;}
+
+.clear:before, .clear:after { content: " "; display: table; }
+.clear:after {clear: both;}
