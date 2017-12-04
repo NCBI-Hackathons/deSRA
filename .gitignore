@@ -35,3 +35,4 @@ web/node_modules
 /*.perf
 /*.trace
 
+core.*
