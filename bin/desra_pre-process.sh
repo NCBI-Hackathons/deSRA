@@ -97,7 +97,20 @@ do
   mkdir -p ${GENE_name}
 	cd ${GENE_name}
   echo "Processing GENE $GENE_name"
-  efetch -db nuccore -id $ACC -format fasta -seq_start $START -seq_stop $STOP > ${GENE_name}_${GID}_${START}_${STOP}.fasta || { echo 'ERROR: Fetching data from NCBI' ; exit 1; }
+  for (( i = 0; i <= 10 ; i++ ))
+  do
+      efetch -db nuccore -id $ACC -format fasta -seq_start $START -seq_stop $STOP > ${GENE_name}_${GID}_${START}_${STOP}.fasta
+      if [ -s ${GENE_name}_${GID}_${START}_${STOP}.fasta ]
+      then
+         break
+      fi
+      sleep 30
+  done
+  if [ ! -s ${GENE_name}_${GID}_${START}_${STOP}.fasta ]
+      then
+         echo "ERROR downloading the fata secuence"
+         exit 0
+  fi
   makeblastdb -in ${GENE_name}_${GID}_${START}_${STOP}.fasta -out ${GENE_name}_${GID}_${START}_${STOP} -title ${GENE_name}_${GID}_${START}_${STOP} -parse_seqids -dbtype nucl || { echo 'ERROR: Creating blast db' ; exit 1; }
   cd ..
 done
