@@ -27,6 +27,7 @@ RUN apt-get update && \
 			python3 python3-pip \
 			nodejs npm \
 			liblwp-protocol-https-perl && \
+			r-base r-base-dev && \
     apt-get clean && \
     apt-get purge && \
 		pip3 install numpy pysam scipy && \
@@ -88,6 +89,8 @@ RUN cd $DST && \
 	cd /home/biodocker/web/ && \
 	npm install && \
 	rm -rf $DST/$FOLDER
+
+USER biodocker
 
 ENV DB=/data/db.sqlite3
 ENV BIN=/home/biodocker/bin
