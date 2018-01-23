@@ -26,7 +26,7 @@ RUN apt-get update && \
 			libcurl4-gnutls-dev \
 			python3 python3-pip \
 			nodejs npm \
-			liblwp-protocol-https-perl && \
+			liblwp-protocol-https-perl \
 			r-base r-base-dev && \
     apt-get clean && \
     apt-get purge && \
