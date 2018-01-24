@@ -85,7 +85,7 @@ RUN cd $DST && \
 	rm -rf $DST/$FOLDER
 
 RUN mkdir /home/biodocker/.ncbi && \
-    mkdir /home/biodocker/web/ && \
+    mkdir /home/biodocker/web/
 
 COPY bin/* /home/biodocker/bin/
 COPY web/* /home/biodocker/web/
