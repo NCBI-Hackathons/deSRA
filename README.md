@@ -108,7 +108,7 @@ A1CF_29974_50799409_50885681.nsq
 To align a single gene with a number of SRA accessions. The gene blastdb should be create with the previous step.
 
 ```
-docker run -it -v `pwd`/data:/data biocontainers/desra desra_go_mb.sh -d /data/blastdb/ref_GRCh38.p7_top_level -s comma_separated_sra_list -g A1CF -t number_of_threads
+docker run -it -v `pwd`/data:/data biocontainers/desra desra_go_mb.sh -d /data/blastdb/ref_GRCh38.p7_top_level -s comma_separated_sra_list -g A1CF -t number_of_threads -c condition1
 ```  
 
 This command will create two files:
