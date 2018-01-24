@@ -84,20 +84,15 @@ RUN cd $DST && \
 	mv $DST/$FOLDER/* /home/biodocker/bin/ && \
 	rm -rf $DST/$FOLDER
 
-ENV URL=https://github.com/NCBI-Hackathons/deSRA
-ENV FOLDER=deSRA
-ENV DST=/tmp
+RUN mkdir /home/biodocker/.ncbi && \
+    mkdir /home/biodocker/web/ && \
 
-RUN cd $DST && \
-	git clone $URL && \
-	mv $DST/$FOLDER/bin/* /home/biodocker/bin/ && \
-	mkdir /home/biodocker/.ncbi && \
-	mv $DST/$FOLDER/config/user-settings.mkfg /home/biodocker/.ncbi/ && \
-	mkdir /home/biodocker/web/ && \
-	mv $DST/$FOLDER/web/* /home/biodocker/web/ && \
-	cd /home/biodocker/web/ && \
-	npm install && \
-	rm -rf $DST/$FOLDER
+COPY bin/* /home/biodocker/bin/
+COPY web/* /home/biodocker/web/
+COPY config/user-settings.mkfg /home/biodocker/.ncbi/
+
+RUN cd /home/biodocker/web/ && \
+	npm install
 
 USER biodocker
 
