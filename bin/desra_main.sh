@@ -104,46 +104,46 @@ if [ "$job_id" -eq "$jobid" ]
 then
     echo "jobid [$jobid] is found in database"
 
-		# cd to jobid directory
+	# cd to jobid directory
     dir="$JOBS/$job_id"
-		echo "dir is [$dir]"
-		cd $dir
+	echo "dir is [$dir]"
+	cd $dir
 
-		# get sra accession lists from sra condition files:
-		sra_list1=`cat sra_cond1 | tr "\\n" "," | sed -e 's/,$/\n/'`
+	# get sra accession lists from sra condition files:
+	sra_list1=`cat sra_cond1 | tr "\\n" "," | sed -e 's/,$/\n/'`
     echo "sra_list1 is [$sra_list1]"
-		sra_list2=`cat sra_cond2 | tr "\\n" "," | sed -e 's/,$/\n/'`
+	sra_list2=`cat sra_cond2 | tr "\\n" "," | sed -e 's/,$/\n/'`
     echo "sra_list2 is [$sra_list2]"
 
     for gene in `cat gene_name`;
     do
-			echo ""
-      echo "gene is [$gene]"
+	    echo ""
+        echo "gene is [$gene]"
 
-			if [ -e ${blastdb}/$gene ]
-			then
-					echo "gene dir is [$blastdb/$gene]"
+		if [ -e ${blastdb}/$gene ]
+		then
+			echo "gene dir is [$blastdb/$gene]"
 
-		  	  # get gene_db files from gene_directory
-		   	  for gene_db in `ls $blastdb/$gene/*.nhr | sed 's/.nhr//'`;
-				  	  do
-				  	    # run desra_go_mb.sh for the gene database using sra accession lists
-				  	    echo "running cmd: desra_go_mb.sh -d $blastdb -s $sra_list1 -g ${gene} $threads"
-		            return_code=`desra_go_mb.sh -d $blastdb -s $sra_list1 -g ${gene} $threads`
-		            echo "return_code of cmd: [$return_code]"
+			# get gene_db files from gene_directory
+		   	for gene_db in `ls $blastdb/$gene/*.nhr | sed 's/.nhr//'`;
+            do
+                # run desra_go_mb.sh for the gene database using sra accession lists
+                echo "running cmd: desra_go_mb.sh -d $blastdb -s $sra_list1 -g ${gene} $threads"
+                return_code=`desra_go_mb.sh -d $blastdb -s $sra_list1 -g ${gene} $threads -c cond1`
+                echo "return_code of cmd: [$return_code]"
 
-				  	    echo "running cmd: desra_go_mb.sh -d $blastdb -s $sra_list2 -g ${gene} $threads"
-		            return_code=`desra_go_mb.sh -d $blastdb -s $sra_list2 -g ${gene} $threads`
-		            echo "return_code of cmd: [$return_code]"
-					    echo ""
-					    echo ""
-		  	  done
-			else
+                echo "running cmd: desra_go_mb.sh -d $blastdb -s $sra_list2 -g ${gene} $threads"
+                return_code=`desra_go_mb.sh -d $blastdb -s $sra_list2 -g ${gene} $threads -c cond2`
+                echo "return_code of cmd: [$return_code]"
+                echo ""
+                echo ""
+		  	done
+		else
 	  	    echo "ERROR: gene dir does NOT exist, continuing with next gene"
-			    echo ""
-			    echo ""
-			    echo ""
-			fi
+            echo ""
+            echo ""
+            echo ""
+		fi
     done
 
 		echo "preparing to run: python3 $BIN/desra_calculate_tpm.py -o ${job_id}.txt"
