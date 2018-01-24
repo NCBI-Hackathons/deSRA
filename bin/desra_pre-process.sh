@@ -20,9 +20,9 @@ fi
 
 if [ ! -e "/data/ncbi" ]
 then
-  mkdir /data/ncbi  || { echo 'ERROR: Creating dir /data/ncbi' ; exit 1; }
-	rm -rf /home/biodocker/.ncbi || { echo 'ERROR: Error removing dir /home/biodocker/.ncbi' ; exit 1; }
-	ln -s /data/ncbi /home/biodocker/.ncbi || { echo 'ERROR: Linking /data/ncbi to /home/biodocker/.ncbi' ; exit 1; }
+    mkdir /data/ncbi  || { echo 'ERROR: Creating dir /data/ncbi' ; exit 1; }
+    rm -rf /home/biodocker/.ncbi || { echo 'ERROR: Error removing dir /home/biodocker/.ncbi' ; exit 1; }
+    ln -s /data/ncbi /home/biodocker/.ncbi || { echo 'ERROR: Linking /data/ncbi to /home/biodocker/.ncbi' ; exit 1; }
 fi
 
 if [ ! -e "$DB" ]

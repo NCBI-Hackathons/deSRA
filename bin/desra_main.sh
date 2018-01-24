@@ -23,7 +23,7 @@ do      case "$o" in
         d)      blastdb="$OPTARG";;
         j)      job_id="$OPTARG";;
         e)      email_address="$OPTARG";;
-				t)      threads="$OPTARG";;
+		t)      threads="$OPTARG";;
         [?])    echo >&2 "Usage: $0 -j jobid -e email_address -d blastdb_dir -t number_of_threads"
                 exit 1;;
         esac
@@ -68,35 +68,35 @@ line=$(echo "select * from jobs WHERE jobid = '$job_id';" | sqlite3 $DB)
 if [ -z "$line" ]
 then
 	echo "insert into jobs (start,email_address, jobid, status) values (CURRENT_TIMESTAMP, '${email_address}', '${job_id}','submitted');" | sqlite3 $DB
-  line=$(echo "select * from jobs WHERE jobid = '$job_id';" | sqlite3 $DB)
+    line=$(echo "select * from jobs WHERE jobid = '$job_id';" | sqlite3 $DB)
 fi
 
 if [ ! -z "${line}" ]
 then
-  echo "db line is [$line]";
-  id=`echo "$line" | cut -d\| -f1`;
-  echo "id is $id";
-  START=`echo "$line" | cut -d\| -f2`
-  echo "START is $START"
-  STOP=`echo "$line" | cut -d\| -f3`
-  echo "STOP is $STOP"
-  email_address=`echo "$line" | cut -d\| -f4`
-  jobid=`echo "$line" | cut -d\| -f5`
-  echo "jobid is $jobid"
-  status=`echo "$line" | cut -d\| -f6`
-  done_status="DONE"
-  echo "status is: $status"
-  if [ "${status}" == "${done_status}" ]
-  then
+    echo "db line is [$line]";
+    id=`echo "$line" | cut -d\| -f1`;
+    echo "id is $id";
+    START=`echo "$line" | cut -d\| -f2`
+    echo "START is $START"
+    STOP=`echo "$line" | cut -d\| -f3`
+    echo "STOP is $STOP"
+    email_address=`echo "$line" | cut -d\| -f4`
+    jobid=`echo "$line" | cut -d\| -f5`
+    echo "jobid is $jobid"
+    status=`echo "$line" | cut -d\| -f6`
+    done_status="DONE"
+    echo "status is: $status"
+    if [ "${status}" == "${done_status}" ]
+    then
     echo "ERROR: status [$status] found for jobid [$jobid] in database, please address and resubmit."
     echo "exiting...."
     exit
-  fi
-  echo ""
+    fi
+    echo ""
 else
-  echo "ERROR: jobid [$jobid] is not found in database, please fix and resubmit."
-  echo "exiting...."
-  exit
+    echo "ERROR: jobid [$jobid] is not found in database, please fix and resubmit."
+    echo "exiting...."
+    exit
 fi
 
 sra_list="";
