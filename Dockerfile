@@ -19,19 +19,28 @@ USER root
 
 RUN apt-get update && \
     apt-get install -y \
-      libncurses5-dev \
-      libncursesw5-dev \
-			libbz2-dev \
-			lzma lzma-dev liblzma-dev \
-			libcurl4-gnutls-dev \
-			python3 python3-pip \
-			nodejs npm \
-			liblwp-protocol-https-perl \
-			r-base r-base-dev && \
+        libncurses5-dev \
+        libncursesw5-dev \
+		libbz2-dev \
+		lzma lzma-dev liblzma-dev \
+		libcurl4-gnutls-dev \
+		python3 python3-pip \
+		nodejs npm \
+		liblwp-protocol-https-perl \
+		r-base r-base-dev && \
     apt-get clean && \
     apt-get purge && \
-		pip3 install numpy pysam scipy && \
+	pip3 install numpy pysam scipy && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+RUN R -e "install.packages('shiny', repos = 'http://cran.us.r-project.org')" && \
+    R -e "install.packages('shinyjs', repos = 'http://cran.us.r-project.org')" && \
+    R -e "install.packages('DT', repos = 'http://cran.us.r-project.org')" && \
+    R -e "install.packages('rglwidget', repos = 'http://cran.us.r-project.org')" && \
+    R -e "install.packages('plotly', repos = 'http://cran.us.r-project.org')" && \
+    R -e "install.packages('dplyr', repos = 'http://cran.us.r-project.org')" && \
+    R -e "install.packages('reshape2', repos = 'http://cran.us.r-project.org')" && \
+    R -e "source('http://bioconductor.org/biocLite.R');biocLite('Biobase')"
 
 USER biodocker
 
