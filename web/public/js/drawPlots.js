@@ -185,7 +185,7 @@ function addDynamic(svg) {
     let infoArea = document.getElementById('info-area');
     let gene_id = parentNode.getAttribute('id');
     // console.log(mark, line, peer);
-    let datum = data.find(d => d.gene_id == gene_id);
+    let datum = data.find(d => d.gene_id === gene_id);
     let geneName = document.getElementById('gene-name-info');
     let geneID = document.getElementById('gene-id-info');
     let tpm1 = document.getElementById('TPM1-info');
